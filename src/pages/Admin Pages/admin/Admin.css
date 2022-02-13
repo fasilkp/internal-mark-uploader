@@ -35,7 +35,8 @@
   font-size: 16px;
   font-weight: 600;
   opacity: 0;
-  transition: all 0.5s ease;
+  animation-name: logoNameAnim;
+  animation-duration: 1s;
 }
 .sidebar.open .logo-details .icon,
 .sidebar.open .logo-details .logo_name{
@@ -208,7 +209,9 @@
 }
 .home-section{
   position: relative;
-  background: #E4E9F7;
+  background: #757F9A;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #d7dde8a1, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #d7dde8a1, #757F9A);
   min-height: 100vh;
   top: 0;
   left: 78px;
@@ -223,6 +226,7 @@
   left: 250px;
   width: calc(100% - 250px);
 }
+
 .divBox{
   display: flex;
   flex-direction: column;
@@ -235,17 +239,27 @@
   font-weight: 500;
   margin: 18px
 }
-
-
 .sub-boxes{
   width: 98%;
   height: 75px;
   background-color: #1d1b313d;
 }
+@keyframes logoNameAnim{
+  0%  {font-size: 0px;}
+  50% {font-size: 1rem;}
+  100% {font-size: 1rem;}
+}
 @media (max-width: 420px) {
   .sidebar li .tooltip{
     display: none;
   }
+  .sidebar.open .nav-list .profile{
+    width: 100%;
+  }
+  .sidebar.open{
+    width: 100%;
+  }
+
 }
 .sidebar .menuClicked a, .menuClicked a i{
     background-color: #fff;

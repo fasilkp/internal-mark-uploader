@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import Admin from './pages/admin/Admin';
+import Admin from './pages/Admin Pages/admin/Admin';
+import './assets/FontAwsesomeIcons/'
 import './App.css';
 function App(props) {
 
