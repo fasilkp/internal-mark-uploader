@@ -4,8 +4,16 @@ import Course from "../course/Course";
 import Student from "../student/Student";
 import Teachers from "../teachers/Teachers";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
-function Admin() {
+const components = {
+  Course,
+  Student,
+  Teachers
+};
+
+function Admin(props) {
+  const TagName = components[props.tag];
   const [sideBarStatus, setSideBarStatus]=useState(false)
   const obj={
       courses:false,
@@ -22,24 +30,30 @@ function Admin() {
         </div>
         <ul className="nav-list">
           <li onClick={()=>{setClicked({...obj, courses:true})}} className={clicked.courses ? "menuClicked" : ""}>
-            <a href="#">
+            <Link to="/">
+              <a href="#">
               <i className="bx bx-grid-alt"></i>
               <span className="links_name">Courses</span>
             </a>
+            </Link>
             <span className="tooltip">Courses</span>
           </li>
           <li onClick={()=>{setClicked({...obj, Students:true})}} className={clicked.Students ? "menuClicked" : ""}>
+          <Link to="/student">
             <a href="#">
               <i> <FontAwesomeIcon icon="user-graduate" className="icons" /></i>
               <span className="links_name">Students</span>
             </a> 
+          </Link>
             <span className="tooltip">Students</span>
           </li>
           <li onClick={()=>{setClicked({...obj, teachers:true})}} className={clicked.teachers ? "menuClicked" : ""}>
+          <Link to="/teachers">
             <a href="#">
             <i> <FontAwesomeIcon icon="chalkboard-teacher" className="icons" /></i>
               <span className="links_name">Teachers</span>
             </a>
+            </Link>
             <span className="tooltip">Teachers</span>
           </li>
           <li className="profile">
@@ -55,10 +69,8 @@ function Admin() {
         </ul>
       </div>
       <section className="home-section">
-        
-          {/* <Course/> */}
-          {/* <Student/> */}
-          <Teachers/>
+        <TagName/>
+
       </section>
     </div>
   );

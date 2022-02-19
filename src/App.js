@@ -2,12 +2,21 @@ import React from 'react';
 import Admin from './pages/Admin Pages/admin/Admin';
 import './assets/FontAwsesomeIcons/'
 import './App.css';
-function App(props) {
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+function App() {
 
   return (
-    <div className="App">
-      <Admin></Admin>
-    </div>
+    <Router>
+        <div className="App">
+          <Routes>
+          <Route path={"/"} element={<Admin tag="Course"/>}/>
+          <Route path={"/student"} element={<Admin tag="Student"/>}/>
+          <Route path={"/teachers"} element={<Admin tag="Teachers"/>}/>
+        </Routes>
+        </div>
+     
+    </Router>
+    
   );
 }
 
