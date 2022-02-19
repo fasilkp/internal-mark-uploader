@@ -227,11 +227,6 @@
   width: calc(100% - 250px);
 }
 
-.divBox{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .home-section .text{
   display: inline-block;
   color: #11101d;
