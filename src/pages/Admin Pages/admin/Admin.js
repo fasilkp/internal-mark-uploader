@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "../admin/Admin.css";
 import Course from "../course/Course";
+import Student from "../student/Student";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Admin() {
@@ -54,7 +55,8 @@ function Admin() {
       </div>
       <section className="home-section">
         
-          <Course/>
+          {/* <Course/> */}
+          <Student/>
       </section>
     </div>
   );
