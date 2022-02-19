@@ -3,7 +3,9 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+
 }
+
 
 .list-container{
     background-color: rgba(255, 255, 255, 0.8);
@@ -30,7 +32,7 @@
     .list-container {
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.4);
+      background-color: rgba(255, 255, 255, 0.3);
     }
   }
 
@@ -61,20 +63,20 @@
     font-size: 1.13rem;
     background-color: rgba(255, 255, 255, .3);
     border-radius: 0px;
-    transition: .3s ease-in-out;
+    transition: .2s ease-in-out;
     box-shadow: 0px 0px 10px 2px rgba(128, 128, 128, 0.45);
 
 }
 .lists:hover .list-icon{
     font-size: .9rem;
-    transition: .3s;
+    transition: .2s;
 
 }
 .list-header .head, .lists .title{
-    flex: 40%;
+    flex: 60%;
     text-align: center;
 }
-.list-header .head:nth-child(1),.lists .title:nth-child(1){
+.list-header .head:nth-child(1),.lists .title:nth-child(1),.list-header .head:last-child,.lists .title:last-child{
     flex: 20%;
 }
 
@@ -115,4 +117,20 @@
     background: #11101D;
     border-radius: 8px;
     border: none;
+    transition: .3s;
+}
+.add-button:hover{
+    border: 2px solid #11101D;
+    background-color: #fff;
+    color: #11101D;
+    font-weight: 600;
+}
+.list-container, .add-button, .text{
+    animation: anime 1s;
+}
+@keyframes anime{
+    from{
+        opacity: 50%;
+    }
+    to{ opacity: 100%;}
 }
