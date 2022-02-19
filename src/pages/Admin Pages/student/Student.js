@@ -1,5 +1,5 @@
 import React from 'react'
-import './Student.css'
+import '../style/Style.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from 'react/cjs/react.development';
 function Student() {

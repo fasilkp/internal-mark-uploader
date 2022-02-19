@@ -55,8 +55,8 @@ function Admin() {
       </div>
       <section className="home-section">
         
-          {/* <Course/> */}
-          <Student/>
+          <Course/>
+          {/* <Student/> */}
       </section>
     </div>
   );
