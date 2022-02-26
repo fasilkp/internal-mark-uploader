@@ -99,7 +99,7 @@ function Course() {
 
             </div>
             <div className="button">
-            <Link className='links'to="/admin/add-course"><button className="add-button">Add Student</button></Link>
+            <Link className='links'to="/admin/add-course"><button className="add-button">Add Course</button></Link>
             </div>
         </div>
     </div>

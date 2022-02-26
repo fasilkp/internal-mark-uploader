@@ -2,6 +2,7 @@ import React from 'react'
 import '../../common styles/listStyle.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Fragment } from 'react/cjs/react.development';
+import {Link} from "react-router-dom"
 function Teachers() {
   return (
     <Fragment>
@@ -18,7 +19,7 @@ function Teachers() {
                     <div className="title">1</div>
                     <div className="title">name1</div>
                     <div className="title buttons">
-                        <div className="list-icon"><FontAwesomeIcon icon="pen"/></div>
+                        <Link to="/admin/edit-teacher"><div className="list-icon"><FontAwesomeIcon icon="pen"/></div></Link>
                         <div className="list-icon"><FontAwesomeIcon icon="trash"/></div>
         
                     </div>
@@ -54,7 +55,7 @@ function Teachers() {
 
             </div>
             <div className="button">
-                <button className="add-button">Add Courses</button>
+                <Link to="/admin/add-teacher"><button className="add-button">Add Teacher</button></Link>
             </div>
         </div>
     </div>
