@@ -1,6 +1,6 @@
 
 .form-container{
-    width: 40%;
+    width: 50%;
     background: rgba(255, 255, 255, 0.4);
     border-radius: 10px;
     padding: 40px;
@@ -31,7 +31,7 @@
 .main{
     display: flex;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     align-items: center;
     justify-content: center;
     margin-top: -50px;
@@ -53,6 +53,16 @@ input::placeholder{
   height: 45px;
   border-radius:7px;
 }
+.btn-danger:focus,.btn-danger:hover{
+  background-color: rgba(255, 255, 255, 0);
+  color: #11101D;
+  border: 1.5px solid #11101D;
+}
+.btn-danger:active{
+  background-color: #11101D;
+  color: white;
+}
+
 
 @media screen and (max-width: 900px) {
     .form-container{

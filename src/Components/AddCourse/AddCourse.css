@@ -1,0 +1,40 @@
+.list-group-item{
+    height: 30px;
+    font-size: .8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.349);
+    border: none;
+    margin-bottom: 5px;
+    border-radius: 10px;
+}
+.list-group{
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 10px;
+}
+.penIcon{
+    z-index: 10;
+    font-size: .6rem;
+    opacity: 95%;
+}
+.list-icons{
+    height: 20px;
+    width: 20px;
+    border: 1px solid;
+}
+.btn-outline-secondary{
+    background-color: #11101D;
+    color: white;
+}
+
+.add-subject-input:focus, #button-addon2:focus,.btn:focus{
+    box-shadow: none;
+}
+#button-addon2:focus,#button-addon2:hover{
+    background-color: #11101D;
+}
+#button-addon2:active{
+    background-color: #11101d83;
+}
+

@@ -9,7 +9,7 @@ function AddStudent() {
     <div className="main">
     <div className="form-container">
         <form>
-            <div className="mb-3"><h4 className="container-header">Add Student</h4></div>
+            <div className="mb-3"><h4 className="container-header">Add Student Details</h4></div>
             <div className="mb-3">
               <label for="name" className="form-label">Student Name</label>
               <input type="text" className="form-control" id="name" placeholder='Enter Student Name' />

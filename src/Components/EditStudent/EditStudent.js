@@ -9,6 +9,7 @@ function EditStudent() {
     <div className="main">
     <div className="form-container">
         <form>
+        <div className="mb-3"><h4 className="container-header">Edit Student Details</h4></div>
             <div className="mb-3">
               <label for="exampleInputEmail1" className="form-label">Student Name</label>
               <input type="text" value="Fasil" className="form-control" id="exampleInputEmail1" placeholder='Enter Student Name' />
