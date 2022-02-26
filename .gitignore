@@ -8,7 +8,6 @@
 # testing
 /coverage
 /src/components/Addcourse
-/src/components/EditTeacher
 
 # production
 /build

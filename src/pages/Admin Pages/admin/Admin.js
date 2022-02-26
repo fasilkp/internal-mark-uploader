@@ -8,7 +8,7 @@ import EditStudent from "../../../Components/EditStudent/EditStudent";
 import AddCourse from "../../../Components/AddCourse/AddCourse";
 import AddTeacher from "../../../Components/AddTeacher/AddTeacher";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import EditTeacher from "../../../Components/EditTaecher.js/EditTeacher";
+import EditTeacher from "../../../Components/EditTeacher/EditTeacher";
 import { Link } from "react-router-dom";
 
 const components = {
