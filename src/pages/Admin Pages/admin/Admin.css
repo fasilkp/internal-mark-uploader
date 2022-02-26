@@ -121,15 +121,21 @@
 .sidebar li .a{
   display: flex;
   height: 100%;
-  width: 100%;
+  width: 110%;
   border-radius: 12px;
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
   background: #11101D;
+  margin-left: -30px;
 }
 .sidebar li .a:hover{
   background: #FFF;
+  width: 50px;
+}
+.sidebar.open li .a:hover{
+  background: #FFF;
+  width: 110%;
 }
 .sidebar li .a .links_name{
   color: #fff;
@@ -232,7 +238,8 @@
   color: #11101d;
   font-size: 25px;
   font-weight: 500;
-  margin: 18px
+  margin: 18px;
+  z-index: 2;
 }
 .sub-boxes{
   width: 98%;

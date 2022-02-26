@@ -3,13 +3,15 @@ import "./Admin.css";
 import Course from "../../../Components/course/Course"
 import Teachers from "../../../Components/teachers/Teachers"
 import Student from "../../../Components/student/Student"
+import AddStudent from "../../../Components/Add Student/AddStudent";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
 const components = {
   Course,
   Student,
-  Teachers
+  Teachers,
+  AddStudent
 };
 
 function Admin(props) {
@@ -48,7 +50,7 @@ function Admin(props) {
             <span className="tooltip">Students</span>
           </li>
           <li onClick={()=>{setClicked({...obj, teachers:true})}} className={clicked.teachers ? "menuClicked" : ""}>
-          <Link className="links" to="/teachers">
+          <Link className="links" to="/teacher">
             <div className="a">
             <i> <FontAwesomeIcon icon="chalkboard-teacher" className="icons" /></i>
               <span className="links_name">Teachers</span>

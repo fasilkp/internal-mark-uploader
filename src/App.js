@@ -11,7 +11,8 @@ function App() {
           <Routes>
           <Route path={"/"} element={<Admin tag="Course"/>}/>
           <Route path={"/student"} element={<Admin tag="Student"/>}/>
-          <Route path={"/teachers"} element={<Admin tag="Teachers"/>}/>
+          <Route path={"/teacher"} element={<Admin tag="Teachers"/>}/>
+          <Route path={"/add-student"} element={<Admin tag="AddStudent"/>}/>
         </Routes>
         </div>
      

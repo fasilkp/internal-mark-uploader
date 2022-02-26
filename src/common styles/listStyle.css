@@ -126,7 +126,7 @@
 }
 .add-button:hover{
     border: 1.5px solid #11101D;
-    background-color: rgba(255, 255, 255, 0.5);
+    background: none;
     color: #11101D;
     font-weight: 600;
 }
