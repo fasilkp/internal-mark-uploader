@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../common styles/listStyle.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from 'react-router-dom';
 import { Fragment } from 'react/cjs/react.development';
 function Course() {
   return (
@@ -98,7 +99,7 @@ function Course() {
 
             </div>
             <div className="button">
-                <button className="add-button">Add Courses</button>
+            <Link className='links'to="/admin/add-course"><button className="add-button">Add Student</button></Link>
             </div>
         </div>
     </div>

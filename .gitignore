@@ -7,6 +7,9 @@
 
 # testing
 /coverage
+/src/components/Addcourse
+/src/components/AddTeacher
+/src/components/EditTeacher
 
 # production
 /build

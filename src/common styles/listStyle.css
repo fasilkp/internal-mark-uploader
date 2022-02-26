@@ -114,9 +114,8 @@
     margin-top:10px ;
 }
 .add-button{
-    width: 85%;
+    width: 79vw;
     height: 45px;
-    position: fixed;
     bottom: 5px;
     color: white;
     background: #11101D;
@@ -133,6 +132,7 @@
 .container{
     animation: anime .7s;
 }
+
 @keyframes anime{
     from{
         width: 0%; opacity: 0%;

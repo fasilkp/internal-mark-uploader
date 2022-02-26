@@ -3,15 +3,23 @@ import "./Admin.css";
 import Course from "../../../Components/course/Course"
 import Teachers from "../../../Components/teachers/Teachers"
 import Student from "../../../Components/student/Student"
-import AddStudent from "../../../Components/Add Student/AddStudent";
+import AddStudent from "../../../Components/AddStudent/AddStudent";
+import EditStudent from "../../../Components/EditStudent/EditStudent";
+import AddCourse from "../../../Components/AddCourse/AddCourse";
+import AddTeacher from "../../../Components/AddTeacher/AddTeacher";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import EditTeacher from "../../../Components/EditTaecher.js/EditTeacher";
 import { Link } from "react-router-dom";
 
 const components = {
   Course,
   Student,
   Teachers,
-  AddStudent
+  AddStudent,
+  EditStudent,
+  AddCourse,
+  AddTeacher,
+  EditTeacher
 };
 
 function Admin(props) {
@@ -32,7 +40,7 @@ function Admin(props) {
         </div>
         <ul className="nav-list">
           <li onClick={()=>{setClicked({...obj, courses:true})}} className={clicked.courses ? "menuClicked" : ""}>
-            <Link className="links" to="/">
+            <Link className="links" to="/admin">
               <div className="a">
               <i className="bx bx-grid-alt"></i>
               <span className="links_name">Courses</span>
@@ -41,7 +49,7 @@ function Admin(props) {
             <span className="tooltip">Courses</span>
           </li>
           <li onClick={()=>{setClicked({...obj, Students:true})}} className={clicked.Students ? "menuClicked" : ""}>
-          <Link className="links" to="/student">
+          <Link className="links" to="/admin/student">
             <div className="a">
               <i> <FontAwesomeIcon icon="user-graduate" className="icons" /></i>
               <span className="links_name">Students</span>
@@ -50,7 +58,7 @@ function Admin(props) {
             <span className="tooltip">Students</span>
           </li>
           <li onClick={()=>{setClicked({...obj, teachers:true})}} className={clicked.teachers ? "menuClicked" : ""}>
-          <Link className="links" to="/teacher">
+          <Link className="links" to="/admin/teacher">
             <div className="a">
             <i> <FontAwesomeIcon icon="chalkboard-teacher" className="icons" /></i>
               <span className="links_name">Teachers</span>
