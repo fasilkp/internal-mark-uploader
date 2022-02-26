@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import "../admin/Admin.css";
-import Course from "../course/Course";
-import Student from "../student/Student";
-import Teachers from "../teachers/Teachers";
+import "./Admin.css";
+import Course from "../../../Components/course/Course"
+import Teachers from "../../../Components/teachers/Teachers"
+import Student from "../../../Components/student/Student"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
@@ -14,45 +14,45 @@ const components = {
 
 function Admin(props) {
   const TagName = components[props.tag];
-  const [sideBarStatus, setSideBarStatus]=useState(false)
+  const [sideBarOpened, setSideBarOpened]=useState(false)
   const obj={
       courses:false,
       Students:false,
-      teachers:false
+      teachers:false 
   }
   const [clicked, setClicked]=useState(obj) 
   return (
     <div>
-      <div className={sideBarStatus?"sidebar open" : "sidebar"}>
+      <div className={sideBarOpened?"sidebar open" : "sidebar"}>
         <div className="logo-details">
-          {sideBarStatus?<div className="logo_name">Internal Mark Uploader</div>:""}
-          <i className={sideBarStatus?"bx bx-menu-alt-right" : "bx bx-menu"} id="btn" onClick={()=>setSideBarStatus(!sideBarStatus)}></i>
+          {sideBarOpened?<div className="logo_name">Internal Mark Uploader</div>:""}
+          <i className={sideBarOpened?"bx bx-menu-alt-right" : "bx bx-menu"} id="btn" onClick={()=>setSideBarOpened(!sideBarOpened)}></i>
         </div>
         <ul className="nav-list">
           <li onClick={()=>{setClicked({...obj, courses:true})}} className={clicked.courses ? "menuClicked" : ""}>
-            <Link to="/">
-              <a href="#">
+            <Link className="links" to="/">
+              <div className="a">
               <i className="bx bx-grid-alt"></i>
               <span className="links_name">Courses</span>
-            </a>
+            </div>
             </Link>
             <span className="tooltip">Courses</span>
           </li>
           <li onClick={()=>{setClicked({...obj, Students:true})}} className={clicked.Students ? "menuClicked" : ""}>
-          <Link to="/student">
-            <a href="#">
+          <Link className="links" to="/student">
+            <div className="a">
               <i> <FontAwesomeIcon icon="user-graduate" className="icons" /></i>
               <span className="links_name">Students</span>
-            </a> 
+            </div> 
           </Link>
             <span className="tooltip">Students</span>
           </li>
           <li onClick={()=>{setClicked({...obj, teachers:true})}} className={clicked.teachers ? "menuClicked" : ""}>
-          <Link to="/teachers">
-            <a href="#">
+          <Link className="links" to="/teachers">
+            <div className="a">
             <i> <FontAwesomeIcon icon="chalkboard-teacher" className="icons" /></i>
               <span className="links_name">Teachers</span>
-            </a>
+            </div>
             </Link>
             <span className="tooltip">Teachers</span>
           </li>
@@ -70,7 +70,6 @@ function Admin(props) {
       </div>
       <section className="home-section">
         <TagName/>
-
       </section>
     </div>
   );

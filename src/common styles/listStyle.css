@@ -59,13 +59,18 @@
     top: 5px;
     z-index: 1;
 }
-.lists:hover{
+/* .lists:hover{
     font-size: 1.13rem;
     background-color: rgba(255, 255, 255, .3);
     border-radius: 0px;
     transition: .2s ease-in-out;
     box-shadow: 0px 0px 10px 2px rgba(128, 128, 128, 0.45);
 
+} */
+.lists:hover{
+    background-color: rgba(255, 255, 255, .2);
+    border-radius: 5px;
+    transition: .1s;
 }
 .lists:hover .list-icon{
     font-size: .9rem;
@@ -117,20 +122,22 @@
     background: #11101D;
     border-radius: 8px;
     border: none;
-    transition: .3s;
+    transition: .2s;
 }
 .add-button:hover{
-    border: 2px solid #11101D;
-    background-color: #fff;
+    border: 1.5px solid #11101D;
+    background-color: rgba(255, 255, 255, 0.5);
     color: #11101D;
     font-weight: 600;
 }
-.list-container, .add-button, .text{
-    animation: anime 1s;
+.container{
+    animation: anime .7s;
 }
 @keyframes anime{
     from{
-        opacity: 50%;
+        width: 0%; opacity: 0%;
     }
-    to{ opacity: 100%;}
+    to{
+    width: 100%; opacity: 100%;
+}
 }
