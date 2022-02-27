@@ -1,0 +1,32 @@
+.admin-login{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #11101D;
+}
+.container-header span{
+    border-bottom: 2.5px solid #11101D;
+}
+.login-main-header{
+    text-align: center;
+    max-width: 20%;
+    margin: -50px 0px 50px 0px;
+}
+.form-container{
+    max-width: 25%;
+    min-width: 320px;
+    padding: 20px;
+}
+.form-control{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+.btn{
+    width: 100%;
+    background-color: #11101D;
+    color: white;
+    display: flex;
+    justify-content: center;
+}

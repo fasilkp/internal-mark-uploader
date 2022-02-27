@@ -3,6 +3,7 @@ import Admin from './pages/Admin Pages/admin/Admin';
 import './assets/FontAwsesomeIcons/'
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from './pages/Admin Pages/Login/Login';
 function App() {
 
   return (
@@ -10,6 +11,7 @@ function App() {
         <div className="App">
           <Routes>
           <Route path={"/admin"} element={<Admin tag="Course"/>}/>
+          <Route path={"/admin/login"} element={<Login/>}/>
           <Route path={"/admin/student"} element={<Admin tag="Student"/>}/>
           <Route path={"/admin/teacher"} element={<Admin tag="Teachers"/>}/>
           <Route path={"/admin/add-student"} element={<Admin tag="AddStudent"/>}/>
