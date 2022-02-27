@@ -9,6 +9,7 @@ import AddCourse from "../../../Components/AddCourse/AddCourse";
 import AddTeacher from "../../../Components/AddTeacher/AddTeacher";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditTeacher from "../../../Components/EditTeacher/EditTeacher";
+import EditCourse from "../../../Components/EditCourse/EditCourse";
 import { Link } from "react-router-dom";
 
 const components = {
@@ -19,7 +20,8 @@ const components = {
   EditStudent,
   AddCourse,
   AddTeacher,
-  EditTeacher
+  EditTeacher,
+  EditCourse
 };
 
 function Admin(props) {

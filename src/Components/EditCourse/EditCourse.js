@@ -2,9 +2,9 @@ import React from 'react'
 import { Fragment } from 'react/cjs/react.development'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "../../common styles/containerStyles.css"
-import "./AddCourse.css"
+import "./../AddCourse/AddCourse.css"
 
-function AddCourse() {
+function EditCourse() {
   return (
       <Fragment>
     <div className="text">Add Course</div>
@@ -62,4 +62,4 @@ function AddCourse() {
   )
 }
 
-export default AddCourse
+export default EditCourse

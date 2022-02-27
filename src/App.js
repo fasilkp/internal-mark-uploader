@@ -15,6 +15,7 @@ function App() {
           <Route path={"/admin/add-student"} element={<Admin tag="AddStudent"/>}/>
           <Route path={"/admin/edit-student"} element={<Admin tag="EditStudent"/>}/>
           <Route path={"/admin/add-course"} element={<Admin tag="AddCourse"/>}/>
+          <Route path={"/admin/edit-course"} element={<Admin tag="EditCourse"/>}/>
           <Route path={"/admin/add-teacher"} element={<Admin tag="AddTeacher"/>}/>
           <Route path={"/admin/edit-teacher"} element={<Admin tag="EditTeacher"/>}/>
         </Routes>
