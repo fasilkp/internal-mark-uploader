@@ -4,6 +4,7 @@ import './assets/FontAwsesomeIcons/'
 import './App.css';
 import Teacherlogin from './pages/Teacher Pages/Teacherlogin';
 import Adminlogin from './pages/Admin Pages/Login/Adminlogin';
+import Studentlogin from './pages/Student Pages/Studentlogin';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
 
@@ -26,6 +27,9 @@ function App() {
           {/* ADMIN PAGES */}
 
           <Route path={"/teacher/login"} element={<Teacherlogin/>}/>
+          {/* Student PAGES */}
+
+          <Route path={"student/login"} element={<Studentlogin/>}/>
           
         </Routes>
         </div>
