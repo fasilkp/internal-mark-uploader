@@ -1,12 +1,9 @@
 import React from 'react'
 import { Fragment } from 'react/cjs/react.production.min';
-import Header from '../Header/Header';
-import "./AdminLogin.css";
+import "../../common styles/Login.css";
 function AdminLogin() {
   return (
     <Fragment>
-      <Header header="Admin Login"/>
-    
     <div className='row admin-login'>
         <h3 className="login-main-header">Login Into Internal Mark Uploader</h3>
         <div className="form-container">
