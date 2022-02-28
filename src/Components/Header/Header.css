@@ -1,9 +1,9 @@
 .Header{
     width: 100%;
     background-color: #11101d;
-    height: 50px;
+    height: 60px;
     display: flex;
     align-items: center;
-    padding-left: 80px;
+    padding-left: 50px;
     color: white;
 }
