@@ -5,6 +5,7 @@ import './App.css';
 import Teacherlogin from './pages/Teacher Pages/Teacherlogin';
 import Adminlogin from './pages/Admin Pages/Login/Adminlogin';
 import Studentlogin from './pages/Student Pages/Studentlogin';
+import Mark from './pages/Student Pages/Mark';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
           {/* Student PAGES */}
 
           <Route path={"student/login"} element={<Studentlogin/>}/>
+          <Route path={"student/display-mark"} element={<Mark/>}/>
           
         </Routes>
         </div>
