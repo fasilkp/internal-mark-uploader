@@ -9,6 +9,12 @@
     margin-bottom: 5px;
     border-radius: 10px;
 }
+.form-container{
+    width: 90%;
+}
+.form-control, select{
+    width: 94%;
+}
 .list-group{
     background-color: rgba(255, 255, 255, 0.2);
     padding: 10px;
@@ -31,10 +37,15 @@
 .add-subject-input:focus, #button-addon2:focus,.btn:focus{
     box-shadow: none;
 }
+#button-addon2{
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #button-addon2:focus,#button-addon2:hover{
     background-color: #11101D;
 }
 #button-addon2:active{
     background-color: #11101d83;
 }
-

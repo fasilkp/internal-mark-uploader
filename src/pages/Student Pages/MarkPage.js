@@ -2,7 +2,7 @@ import React from 'react'
 import { Fragment } from 'react/cjs/react.production.min'
 import Header from '../../Components/Header/Header'
 import InternalDisplay from '../../Components/InternalDisplay/InternalDisplay'
-function Mark() {
+function MarkPage() {
   return (
     <Fragment>
         <Header header="Internal Marks"/>
@@ -11,4 +11,4 @@ function Mark() {
   )
 }
 
-export default Mark
+export default MarkPage

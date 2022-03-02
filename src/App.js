@@ -2,12 +2,14 @@ import React from 'react';
 import Admin from './pages/Admin Pages/admin/Admin';
 import './assets/FontAwsesomeIcons/'
 import './App.css';
-import Teacherlogin from './pages/Teacher Pages/Teacherlogin';
 import Adminlogin from './pages/Admin Pages/Login/Adminlogin';
-import Studentlogin from './pages/Student Pages/Studentlogin';
 import TeacherHomePage from './pages/Teacher Pages/TeacherHomePage';
-import Mark from './pages/Student Pages/Mark';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import StudentLoginPage from './pages/Student Pages/StudentLoginPage';
+import MarkPage from './pages/Student Pages/MarkPage';
+import SelectDetailsPage from './pages/Teacher Pages/SelectDetailsPage';
+import TeacherLoginPage from './pages/Teacher Pages/TeacherLoginPage';
+import UploadMarkPage from './pages/Teacher Pages/UploadMarkPage';
 function App() {
 
   return (
@@ -26,14 +28,17 @@ function App() {
           <Route path={"/admin/add-teacher"} element={<Admin tag="AddTeacher"/>}/>
           <Route path={"/admin/edit-teacher"} element={<Admin tag="EditTeacher"/>}/>
 
-          {/* ADMIN PAGES */}
+          {/* TEACHER PAGES */}
 
-          <Route path={"/teacher/login"} element={<Teacherlogin/>}/>
+          <Route path={"/teacher/login"} element={<TeacherLoginPage/>}/>
           <Route path={"/teacher/home"} element={<TeacherHomePage/>}/>
+          <Route path={"/teacher/select-details"} element={<SelectDetailsPage/>}/>
+          <Route path={"/teacher/upload-mark"} element={<UploadMarkPage/>}/>
+
           {/* Student PAGES */}
 
-          <Route path={"student/login"} element={<Studentlogin/>}/>
-          <Route path={"student/display-mark"} element={<Mark/>}/>
+          <Route path={"student/login"} element={<StudentLoginPage/>}/>
+          <Route path={"student/display-mark"} element={<MarkPage/>}/>
           
         </Routes>
         </div>

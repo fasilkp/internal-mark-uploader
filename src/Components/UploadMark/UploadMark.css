@@ -1,0 +1,95 @@
+.main{
+    display: flex;
+    justify-content: flex-start;
+    height: 100%;
+    padding: 0px;
+}
+.head div{
+    display: flex;
+    width: 90%;
+    justify-content: flex-start;
+    padding: 20px 0px 20px 0px;
+}
+.table{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+table, tr, th, td{
+    border: none;
+    border-radius: 0px;
+    text-align: center;
+}
+table{
+    width: 90%;
+    background-color: rgba(255, 255, 255, .6);
+    border-radius: 5px;
+    overflow: hidden;
+}
+td{
+    font-size: .9rem;
+    padding: 10px;
+    text-align: center;
+}
+.table table tr td{
+    padding: 10px;
+}
+tr:first-child td{
+    background-color: #11101D;
+    color: white;
+    font-size: 1rem;
+}
+tr:nth-child(odd){
+    background-color: rgba(17, 16, 29, 0.1);
+}
+input{
+    all: unset;
+    width: 50px;
+    background-color: #ffffff;
+    border-radius: 7px;
+}
+
+input:disabled{
+    background: none;
+}
+.btns, .head{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.btns div{
+    width: 90%;
+    display: flex;
+    justify-content: flex-end;
+    border-top: 2px solid #11101D;
+    padding-top: 20px;
+}
+.submit-btn{
+    all: unset;
+    width: 120px;
+    height: 40px;
+    background-color: #11101D;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+}
+@media screen and (max-width: 500px) {
+    
+.table table tr td {
+        padding: 3px;
+        font-size: .5rem;
+    }
+    .table table tr td:first-child{
+        display: none;
+    }
+    .head{
+        margin-top: 0px;
+    }
+    .submit-btn{
+        width:70px;
+        height: 30px;
+        font-size: 10px;
+
+        }
+  }

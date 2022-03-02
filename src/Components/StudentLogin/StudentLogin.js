@@ -23,7 +23,7 @@ function StudentLogin() {
                 </select>
             </div>
         <div class="mb-3">
-            <button className="btn">Login</button>  
+            <button className="login-btn">Login</button>  
         </div>    
           </form>
     </div>

@@ -19,7 +19,7 @@ function TeacherLogin() {
                 <input type="password" placeholder='Enter Your Password' class="form-control" id="exampleInputPassword1"/>
       </div>
       <div class="mb-3">
-          <button className="btn">Login</button>  
+          <button className="login-btn">Login</button>  
       </div>    
         </form>
   </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Fragment } from 'react/cjs/react.production.min'
 import Header from '../../Components/Header/Header'
 import StudentLogin from '../../Components/StudentLogin/StudentLogin'
-function Studentlogin() {
+function StudentLoginPage() {
   return (
     <Fragment>
         <Header header="Student Login"></Header>
@@ -11,4 +11,4 @@ function Studentlogin() {
   )
 }
 
-export default Studentlogin
+export default StudentLoginPage
