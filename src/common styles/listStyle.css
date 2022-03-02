@@ -129,15 +129,4 @@
     color: #11101D;
     font-weight: 600;
 }
-.container{
-    animation: anime .7s;
-}
 
-@keyframes anime{
-    from{
-        width: 0%; opacity: 0%;
-    }
-    to{
-    width: 100%; opacity: 100%;
-}
-}
