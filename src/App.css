@@ -11,3 +11,6 @@ body{
   display: flex;
   flex-direction: column;
 }
+.form-container{
+  width: 50%;
+}

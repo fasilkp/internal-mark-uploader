@@ -18,7 +18,6 @@
 }
 .form-container{
     width: 25%;
-    min-width: 320px;
     padding: 20px;
 }
 .form-control, select{

@@ -4,7 +4,7 @@ import { Fragment } from 'react/cjs/react.development'
 import "../../common styles/containerStyles.css"
 
 import db from "../../config/firebase"
-import { collection, onSnapshot, setDoc, doc, getDoc } from "firebase/firestore"
+import {setDoc, doc, getDoc } from "firebase/firestore"
 
 
 function EditTeacher(props) {
