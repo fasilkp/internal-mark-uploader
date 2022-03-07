@@ -1,61 +1,122 @@
-import React from 'react'
+import React,{useState, useEffect} from 'react'
+import db from "../../config/firebase"
+import { onSnapshot,collection, query, where, getDocs, getDoc,doc} from 'firebase/firestore'
 import "./UploadMark.css"
+import { useLocation } from 'react-router-dom'
+
 
 function UploadMark() {
+const location=useLocation();
+const [students, setStudents]=useState([])
+const [studentsData, setStudentsData]=useState({})
+const [records, setRecords]=useState([])
+const[mark,setMark]=useState({
+    assignment:0,
+    attendance:0,
+    exam:0,
+    seminar:0,
+    total:function(){return this.attendance+this.assignment+this.seminar+this.exam}
+})
+
+const [marks, setMarks]=useState([])
+const {sem, course, subject}=location.state
+const studentRef=collection(db, "student")
+useEffect(async()=>{
+    let q =await query(studentRef, where("courseId", "==", course));
+    q = await query(q, where("current_sem", "==", sem));
+    await getDocs(q).then((querySnapshot)=>{
+    setStudents(querySnapshot.docs);
+    querySnapshot.forEach((obj)=>{
+        studentsData[obj.data().regNo]=mark
+    })
+    console.log(studentsData);
+    
+    });
+  },[])
+// async function addData(rn,value,catgry){
+//  await getDoc(doc(db,"student",rn)).then((obj)=>{
+//      console.log(obj.data());
+//  })
+// }
   return (
-    <div className="main row">
+    <div className="main row uploadMark">
+        <div className="head"><div><h5>Subject Details</h5></div></div>
+        <div className="table">
+        <table>
+                <tr className='tableFirstRow'>
+                    <td colSpan="3">Subject</td>
+                    <td colSpan="4">{subject}</td> 
+                </tr>
+        </table>
+        
+        </div>
         <div className="head"><div><h5>Enter Internal Marks</h5></div></div>
         <div className="table">
             <table>
-                <tr>
-                    <td>Register No</td>
-                    <td>Name</td>
-                    <td>Assignment</td>
-                    <td>Attendance</td>
-                    <td>Exam</td>
-                    <td>Seminar</td>
-                    <td>Total</td>
+                <tr className='tableFirstRow'>
+                    <th>Register No</th>
+                    <th>Name</th>
+                    <th>Assignment</th>
+                    <th>Attendance</th>
+                    <th>Exam</th>
+                    <th>Seminar</th>
+                    <th>Total</th>
                 </tr>
-                <tr>
-                    <td>MSATSCS001</td>
-                    <td>Rahul Bhaskaran</td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="20" disabled/></td>
-                </tr> 
-                <tr>
-                    <td>MSATSCS001</td>
-                    <td>Rahul Bhaskaran</td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="20" disabled/></td>
-                </tr> 
-                <tr>
-                    <td>MSATSCS001</td>
-                    <td>Rahul Bhaskaran</td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="20" disabled/></td>
-                </tr> 
-                <tr>
-                    <td>MSATSCS001</td>
-                    <td>Rahul Bhaskaran</td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="5" /></td>
-                    <td><input type="number" value="20" disabled/></td>
-                </tr> 
+                {students && students.map((obj,index)=>{
+                        return <tr key={index}>
+                        <td>{obj.data().regNo}</td>
+                        <td>{obj.data().name}</td>
+                        <td>
+                            <input type="number"
+                            value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].assignment} 
+                            onChange={(e)=>{
+                            setStudentsData({
+                                ...studentsData,[obj.data().regNo]:{
+                                                ...studentsData[obj.data().regNo],
+                                                assignment:e.target.value>5 ? 5 : e.target.value<0 ? 0: parseInt(e.target.value)}
+                            })}}/>
+                        </td>
+                        <td>
+                            <input type="number"
+                            value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].attendance} 
+                            onChange={(e)=>{
+                            setStudentsData({
+                                ...studentsData,[obj.data().regNo]:{
+                                                ...studentsData[obj.data().regNo],
+                                                attendance:e.target.value>5 ? 5 : e.target.value<0 ? 0: parseInt(e.target.value)}
+                            })}}/>
+                        </td>
+                        <td>
+                            <input type="number"
+                            value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].exam}
+                            onChange={(e)=>{
+                            setStudentsData({
+                                ...studentsData,[obj.data().regNo]:{
+                                                ...studentsData[obj.data().regNo],
+                                                exam:e.target.value>5 ? 5 : e.target.value<0 ? 0: parseInt(e.target.value)}
+                            })}}/>
+                        </td>
+                        <td>
+                            <input type="number"
+                            value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].seminar} 
+                            onChange={(e)=>{
+                            setStudentsData({
+                                ...studentsData,[obj.data().regNo]:{
+                                                ...studentsData[obj.data().regNo],
+                                                seminar:e.target.value>5 ? 5 : e.target.value<0 ? 0: parseInt(e.target.value)}
+                            })}}/>
+                        </td>
+                        <td>
+                            <input type="number" disabled 
+                            value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].total()}/>
+                        </td>
+
+                    </tr> 
+                })}
             </table>
         </div>
         <div className="btns">
-            <div><button className='submit-btn'>Submit</button></div>
+            <div><button className='submit-btn' onClick={()=>console.log(studentsData)}>Submit</button></div>
             
         </div>
     </div>

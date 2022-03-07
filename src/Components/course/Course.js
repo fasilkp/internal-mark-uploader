@@ -5,16 +5,22 @@ import { Fragment } from 'react/cjs/react.development';
 import React,{useEffect, useState} from 'react';
 import db from "../../config/firebase"
 import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore"
+import {ClipLoader} from 'react-spinners'
 function Course() {
     const [courses, setCourses]=useState([])
+    const [load, setLoad]=useState(true)
     useEffect(()=>{
         onSnapshot(collection(db, "courses"),(snapshot)=>{
           setCourses(snapshot.docs);
+          setLoad(false)
+
         });
       })
   return (
     <Fragment>
+        
     <div className="text">Courses</div>
+    {load && <div className="loader"><ClipLoader/></div>}
     <div>
         <div className="container">
             <div className="list-container">
@@ -29,7 +35,7 @@ function Course() {
                         <div className="title">{index+1}</div>
                         <div className="title">{obj.data().name}</div>
                         <div className="title buttons">
-                            <div className="list-icon"><FontAwesomeIcon icon="pen"/></div>
+                            <Link to="/admin/edit-course" state={{obj:obj.data()}}><div className="list-icon"><FontAwesomeIcon icon="pen"/></div></Link>
                             <div className="list-icon" onClick={async ()=>{
                                  if(window.confirm("Are you sure ? you want to delete this record")){
                                     await deleteDoc(doc(db, "courses", obj.data().variable)).then(()=>{
@@ -48,6 +54,7 @@ function Course() {
                 
                 
             </div>
+            
             <div className="button">
             <Link className='links'to="/admin/add-course"><button className="add-button">Add Course</button></Link>
             </div>

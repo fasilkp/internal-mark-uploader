@@ -1,34 +1,43 @@
 import React ,{useEffect, useState} from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Fragment } from 'react/cjs/react.development'
 import "../../common styles/containerStyles.css"
 
 import db from "../../config/firebase"
 import {setDoc, doc, getDoc } from "firebase/firestore"
+import { ClipLoader } from 'react-spinners'
 
 
 function EditTeacher(props) {
-  const location = useLocation()
+  const location = useLocation();
   const { obj} = location.state
-
+  const navigate=useNavigate();
   const [name, setName]=useState(obj.name);
   const [regNo, setRegNo]=useState(obj.regNo);
   const [email, setEmail]=useState(obj.email);
-  
+  const [submitLoader, setSubmitLoader]=useState(false)
+  const [load, setLoad]=useState(true);
+  useEffect(()=>{
+      setLoad(false)
+  }) 
 
   async function onHandleSubmit(e){
+    setSubmitLoader(true)
     e.preventDefault();
     await setDoc(doc(db, "teachers", regNo), {
       name,
       regNo,
       email
     }).then(()=>{
-      console.log("Edited")
+      setSubmitLoader(false)
+      navigate('/admin/teacher')
+      alert("successfully edited")
     })
   }
   return (
       <Fragment>
     <div className="text">Edit Teacher</div>
+    {load && <div className="loader"><ClipLoader/></div>}
     <div className="main">
     <div className="form-container">
         <form onSubmit={onHandleSubmit}>
@@ -48,7 +57,7 @@ function EditTeacher(props) {
           
             <div className="btn">
                 <button type="reset" className="btn btn-danger">reset</button>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="button" className="btn btn-primary" onClick={onHandleSubmit}>{submitLoader?<ClipLoader size="25" color="white"/>: "Submit"}</button>
             </div>
           </form>
     </div>

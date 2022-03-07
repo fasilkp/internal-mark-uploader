@@ -81,11 +81,14 @@
     display: flex;
     align-items: center;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .boxes{
         flex-direction: column;
         margin: 0px;
         width: 100%;
+    }
+    .main.home{
+        margin-top: 50px;
     }
     .box{
         width: 90%;

@@ -1,13 +1,14 @@
-.form-container{
-    width: 40%;
-}
+
 .container-header span{
     font-size: 1.2rem;
     border-bottom: 2px solid;
 }
+.select-details{
+    margin-top: 5%;
+}
 @media screen and (max-width: 500px) {
     .form-container{
-      max-width: 90%;
+        width: 85%;
     }
     .admin-login{
         min-height: 90vh;

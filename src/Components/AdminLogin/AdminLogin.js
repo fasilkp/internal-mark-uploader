@@ -6,7 +6,7 @@ function AdminLogin() {
     <Fragment>
     <div className='row admin-login'>
         <h3 className="login-main-header">Login Into Internal Mark Uploader</h3>
-        <div className="form-container">
+        <div className="form-container login">
         <form>
         <div className="mb-3"><h4 className="container-header"><span>Login</span></h4></div>
         <div class="mb-3">
@@ -18,7 +18,7 @@ function AdminLogin() {
                   <input type="password" placeholder='Enter Your Password' class="form-control" id="exampleInputPassword1"/>
         </div>
         <div class="mb-3">
-            <button className="btn">Login</button>  
+            <button className="login-btn">Login</button>  
         </div>    
           </form>
     </div>

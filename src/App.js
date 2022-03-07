@@ -10,6 +10,7 @@ import MarkPage from './pages/Student Pages/MarkPage';
 import SelectDetailsPage from './pages/Teacher Pages/SelectDetailsPage';
 import TeacherLoginPage from './pages/Teacher Pages/TeacherLoginPage';
 import UploadMarkPage from './pages/Teacher Pages/UploadMarkPage';
+import {ClipLoader} from "react-spinners"
 function App() {
 
   return (
@@ -31,13 +32,13 @@ function App() {
           {/* TEACHER PAGES */}
 
           <Route path={"/teacher/login"} element={<TeacherLoginPage/>}/>
-          <Route path={"/teacher/home"} element={<TeacherHomePage/>}/>
+          <Route path={"/teacher"} element={<TeacherHomePage/>}/>
           <Route path={"/teacher/select-details"} element={<SelectDetailsPage/>}/>
           <Route path={"/teacher/upload-mark"} element={<UploadMarkPage/>}/>
 
           {/* Student PAGES */}
 
-          <Route path={"student/login"} element={<StudentLoginPage/>}/>
+          <Route path={"/"} element={<StudentLoginPage/>}/>
           <Route path={"student/display-mark"} element={<MarkPage/>}/>
           
         </Routes>

@@ -2,6 +2,7 @@ import db from "../../config/firebase"
 import { setDoc, doc } from "firebase/firestore"
 import { useNavigate} from "react-router-dom";
 import React, {Fragment, useState, useContext, useEffect} from 'react'
+import { ClipLoader } from "react-spinners";
 import "../../common styles/containerStyles.css"
 
 function AddTeacher() {
@@ -9,17 +10,13 @@ function AddTeacher() {
   const [name, setName]=useState("");
   const [regNo, setRegNo]=useState("");
   const [email, setEmail]=useState("");
+  const [submitLoader, setSubmitLoader]=useState(false)
+  const [load, setLoad]=useState(false)
   
   const[btn, setBtn]=useState(false)
 
-  // const db=firebase.firestore()
-  // const teacherDoc= doc(db,'teachers', 'JycrNY68TPjECd7Z4UNr')
-  // setDoc(teacherDoc, {name:'fasil'}, {merge:true})
-
-     
-
   async function  handleSubmit(e){
-    e.preventDefault();
+    setSubmitLoader(true)
     await setDoc(doc(db, "teachers", regNo), {
       name,
       regNo,
@@ -29,13 +26,17 @@ function AddTeacher() {
       navigate('/admin/teacher')
     })
   }
+  useEffect(()=>{
+    setLoad(false)
+  })
 
   return (
       <Fragment>
     <div className="text">Add Teacher</div>
+    {load && <div className="loader"><ClipLoader/></div>}
     <div className="main">
     <div className="form-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e)=>e.preventDefault()}>
             <div className="mb-3"><h4 className="container-header">Add Teacher Details</h4></div>
             <div className="mb-3">
               <label for="name" className="form-label">Teacher Name</label>
@@ -55,7 +56,7 @@ function AddTeacher() {
           
             <div className="btn">
                 <button type="reset" className="btn btn-danger">reset</button>
-                <button type="submit" className="btn btn-primary">Submit</button>
+                <button type="submit" className="btn btn-primary" onClick={handleSubmit}>{submitLoader?<ClipLoader size="25" color="white"/>: "Submit"}</button>
             </div>
           </form>
     </div>

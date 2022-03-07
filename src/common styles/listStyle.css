@@ -8,7 +8,7 @@
 
 
 .list-container{
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 1);
     border-radius: 10px;
     color: #333;
     font-family: system-ui, sans-serif;
@@ -32,7 +32,7 @@
     .list-container {
       -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
-      background-color: rgba(255, 255, 255, 0.3);
+      background-color: rgba(255, 255, 255, 1);
     }
   }
 
@@ -59,18 +59,9 @@
     top: 5px;
     z-index: 1;
 }
-/* .lists:hover{
-    font-size: 1.13rem;
-    background-color: rgba(255, 255, 255, .3);
-    border-radius: 0px;
-    transition: .2s ease-in-out;
-    box-shadow: 0px 0px 10px 2px rgba(128, 128, 128, 0.45);
-
-} */
 .lists:hover{
-    background-color: rgba(255, 255, 255, .2);
+    background-color: rgba(2, 2, 2, .2);
     border-radius: 5px;
-    transition: .1s;
 }
 .lists:hover .list-icon{
     font-size: .7rem;
@@ -80,6 +71,7 @@
 .list-header .head, .lists .title{
     flex: 60%;
     text-align: center;
+    padding: 10px;
 }
 .list-header .head:nth-child(1),.lists .title:nth-child(1),.list-header .head:last-child,.lists .title:last-child{
     flex: 20%;

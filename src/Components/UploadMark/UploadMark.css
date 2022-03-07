@@ -1,8 +1,9 @@
 .main{
     display: flex;
-    justify-content: flex-start;
-    height: 100%;
+    justify-content: center;
+    min-height: 75vh;
     padding: 0px;
+    margin-top: 50px;
 }
 .head div{
     display: flex;
@@ -35,10 +36,13 @@ td{
 .table table tr td{
     padding: 10px;
 }
-tr:first-child td{
+.tableFirstRow td{
     background-color: #11101D;
     color: white;
     font-size: 1rem;
+}
+.tableFirstRow:first-child td:last-child{
+    background-color: #11101de9;
 }
 tr:nth-child(odd){
     background-color: rgba(17, 16, 29, 0.1);
@@ -74,11 +78,18 @@ input:disabled{
     text-align: center;
     border-radius: 5px;
 }
+.edit-container{
+    height: 100%;
+  }
+  
 @media screen and (max-width: 500px) {
     
 .table table tr td {
         padding: 3px;
         font-size: .5rem;
+    }
+    .main{
+        margin: 0px;
     }
     .table table tr td:first-child{
         display: none;
@@ -92,4 +103,8 @@ input:disabled{
         font-size: 10px;
 
         }
+    .uploadMark{
+        justify-content: flex-start;
+        padding-top: 50px;
+    }
   }

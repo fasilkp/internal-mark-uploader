@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import { Fragment } from 'react/cjs/react.development'
 import { useNavigate} from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ClipLoader } from 'react-spinners';
 import "../../common styles/containerStyles.css"
 import "./AddCourse.css"
+import { replaceSpecialCharecters } from '../../commonFunctions/idGenerate';
 
 import db from "../../config/firebase"
 import { setDoc, doc } from "firebase/firestore"
@@ -17,6 +19,9 @@ function AddCourse() {
   const [input4, setInput4]=useState('')
   const [input5, setInput5]=useState('')
   const [input6, setInput6]=useState('')
+
+  const [load, setLoad]=useState(true)
+  const [submitLoader, setSubmitLoader]=useState(false)
 
   const navigate=useNavigate();
 
@@ -51,12 +56,12 @@ function AddCourse() {
     subjects:[...sem6.subjects, input6]})
     setInput6("")}
 
-  function replaceSpecialCharecters(str){
-    return (" "+str).replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "_").replace(/ /g, '_').toLowerCase().substr(1, str.length)
-  }
+
   async function onHandleSubmit(){
+    setSubmitLoader(true)
     await setDoc(doc(db, "courses", course.variable), {
       name:course.name,
+      id:course.variable,
       variable:course.variable,
       sem1,
       sem2,
@@ -67,13 +72,23 @@ function AddCourse() {
     }).then(()=>{
       console.log("uploaded");
       navigate('/admin')
+      setSubmitLoader(false)
     })
   }
-
+  const removeELement=(index,n)=>{
+        const sem=eval("sem"+n+".subjects")
+        sem.splice(index, 1)
+        eval("setSem"+n+"({subjects:[...sem]})");
+        console.log(sem1);
+  }
+  useEffect(()=>{
+    setLoad(false)
+  })
   return (
       <Fragment>
     <div className="text">Add Course</div>
-    <div className="main">
+    {load && <div className="loader"><ClipLoader/></div>}
+    <div className="main edit-container">
     <div className="form-container">
         <form onSubmit={(e)=>{e.preventDefault()}}>
             <div className="mb-3"><h4 className="container-header">Add Course Details</h4></div>
@@ -84,18 +99,18 @@ function AddCourse() {
                 name:e.target.value,
                 variable:replaceSpecialCharecters(e.target.value)
                 })
-                }} id="name" placeholder='Enter Student Name' />
+                }} id="name" placeholder='Enter Course Name' />
             </div>
             <div className="mb-3">
               <label className="form-label">Sem 1</label>
               <div class="input-group mb-3">
-                  <input type="text" class="form-control add-subject-input" value={input1} onChange={(e)=>{setInput1(e.target.value)}}  placeholder="Enter sem 1 Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                  <input type="text" class="form-control add-subject-input" value={input1}onChange={(e)=>{setInput1(e.target.value)}}  placeholder="Enter sem Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
                   <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={addToSem1}>Add</button>
             </div>
                 <ul class="list-group">
                   {
-                    sem1.subjects.map((item)=>{
-                      return <li class="list-group-item">{item}<div className="list-icon list-icons"><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
+                    sem1.subjects.map((item,index)=>{
+                      return <li class="list-group-item">{item}<div className="list-icon list-icons" onClick={()=>removeELement(index, 1)}><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
                     })
                   }
                 </ul>
@@ -103,13 +118,13 @@ function AddCourse() {
             <div className="mb-3">
               <label className="form-label">Sem 2</label>
               <div class="input-group mb-3">
-                  <input type="text" class="form-control add-subject-input" value={input2} onChange={(e)=>{setInput2(e.target.value)}}  placeholder="Enter sem 2 Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                  <input type="text" class="form-control add-subject-input" value={input2} onChange={(e)=>{setInput2(e.target.value)}}  placeholder="Enter sem Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
                   <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={addToSem2}>Add</button>
             </div>
                 <ul class="list-group">
                 {
-                    sem2.subjects.map((item)=>{
-                      return <li class="list-group-item">{item}<div className="list-icon list-icons"><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
+                    sem2.subjects.map((item,index)=>{
+                      return <li class="list-group-item">{item}<div className="list-icon list-icons" onClick={()=>removeELement(index, 2)}><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
                     })
                   }
                 </ul>
@@ -117,13 +132,13 @@ function AddCourse() {
             <div className="mb-3">
               <label className="form-label">Sem 3</label>
               <div class="input-group mb-3">
-                  <input type="text" class="form-control add-subject-input" value={input3} onChange={(e)=>{setInput3(e.target.value)}}  placeholder="Enter sem 3 Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                  <input type="text" class="form-control add-subject-input" value={input3} onChange={(e)=>{setInput3(e.target.value)}}  placeholder="Enter sem Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
                   <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={addToSem3}>Add</button>
             </div>
                 <ul class="list-group">
                 {
-                    sem3.subjects.map((item)=>{
-                      return <li class="list-group-item">{item}<div className="list-icon list-icons"><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
+                    sem3.subjects.map((item,index)=>{
+                      return <li class="list-group-item">{item}<div className="list-icon list-icons" onClick={()=>removeELement(index, 3)}><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
                     })
                   }
                 </ul>
@@ -131,13 +146,13 @@ function AddCourse() {
             <div className="mb-3">
               <label className="form-label">Sem 4</label>
               <div class="input-group mb-3">
-                  <input type="text" class="form-control add-subject-input" value={input4} onChange={(e)=>{setInput4(e.target.value)}}  placeholder="Enter sem 3 Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                  <input type="text" class="form-control add-subject-input" value={input4} onChange={(e)=>{setInput4(e.target.value)}}  placeholder="Enter sem Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
                   <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={addToSem4}>Add</button>
             </div>
                 <ul class="list-group">
                 {
-                    sem4.subjects.map((item)=>{
-                      return <li class="list-group-item">{item}<div className="list-icon list-icons"><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
+                    sem4.subjects.map((item,index)=>{
+                      return <li class="list-group-item">{item}<div className="list-icon list-icons" onClick={()=>removeELement(index, 4)}><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
                     })
                   }
                 </ul>
@@ -145,13 +160,13 @@ function AddCourse() {
             <div className="mb-3">
               <label className="form-label">Sem 5</label>
               <div class="input-group mb-3">
-                  <input type="text" class="form-control add-subject-input" value={input5} onChange={(e)=>{setInput5(e.target.value)}}  placeholder="Enter sem 3 Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                  <input type="text" class="form-control add-subject-input" value={input5} onChange={(e)=>{setInput5(e.target.value)}}  placeholder="Enter sem Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
                   <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={addToSem5}>Add</button>
             </div>
                 <ul class="list-group">
                 {
-                    sem5.subjects.map((item)=>{
-                      return <li class="list-group-item">{item}<div className="list-icon list-icons"><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
+                    sem5.subjects.map((item,index)=>{
+                      return <li class="list-group-item">{item}<div className="list-icon list-icons" onClick={()=>removeELement(index, 5)}><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
                     })
                   }
                 </ul>
@@ -159,13 +174,13 @@ function AddCourse() {
             <div className="mb-3">
               <label className="form-label">Sem 6</label>
               <div class="input-group mb-3">
-                  <input type="text" class="form-control add-subject-input" value={input6} onChange={(e)=>{setInput6(e.target.value)}}  placeholder="Enter sem 3 Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
+                  <input type="text" class="form-control add-subject-input" value={input6} onChange={(e)=>{setInput6(e.target.value)}}  placeholder="Enter sem Subjects" aria-label="Recipient's username" aria-describedby="button-addon2" />
                   <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick={addToSem6}>Add</button>
             </div>
                 <ul class="list-group">
                 {
-                    sem6.subjects.map((item)=>{
-                      return <li class="list-group-item">{item}<div className="list-icon list-icons"><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
+                    sem6.subjects.map((item,index)=>{
+                      return <li class="list-group-item">{item}<div className="list-icon list-icons" onClick={()=>removeELement(index, 6)}><FontAwesomeIcon className='penIcon' icon="trash"/></div></li>
                     })
                   }
                 </ul>
@@ -173,7 +188,7 @@ function AddCourse() {
            
             <div className="btn">
                 <button type="reset" className="btn btn-danger">Clear</button>
-                <button type="button" onClick={onHandleSubmit} className="btn btn-primary">Submit</button>
+                <button type="button" onClick={onHandleSubmit} className="btn btn-primary">{submitLoader?<ClipLoader size="25" color="white"/>: "Submit"}</button>
             </div>
             
           </form>

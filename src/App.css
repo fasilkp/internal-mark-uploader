@@ -2,10 +2,9 @@ body{
   background: #757F9A;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to left, #d7dde8a1, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to left, #d7dde8a1, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  margin-right: -24px;
 }
-.links{
-  text-decoration: none;
+.links, .links:hover{
+  all: unset;
 }
 .App{
   display: flex;
@@ -13,4 +12,16 @@ body{
 }
 .form-container{
   width: 50%;
+}
+.loader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.26);
+  z-index: 100;
 }

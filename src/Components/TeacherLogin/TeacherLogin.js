@@ -1,14 +1,13 @@
 import React from 'react'
 import { Fragment } from 'react/cjs/react.production.min'
 import "../../common styles/Login.css"
-
+import {Link} from "react-router-dom"
 
 function TeacherLogin() {
   return (
     <Fragment>
   <div className='row admin-login'>
-      <h3 className="login-main-header">Login Into Internal Mark Uploader</h3>
-      <div className="form-container">
+      <div className="form-container login">
       <form>
       <div className="mb-3"><h4 className="container-header"><span>Login</span></h4></div>
       <div class="mb-3">
@@ -24,6 +23,7 @@ function TeacherLogin() {
       </div>    
         </form>
   </div>
+  <Link to="/" className='links'><div className="login-another"><span>Login as student</span></div></Link>
   </div>
   </Fragment>
   )
