@@ -41,7 +41,6 @@ function AddStudent() {
           setDoc(doc(db, "student", regNo), {
             courseId:replaceSpecialCharecters(course),
             regNo,name,course,year,
-            course_id:replaceSpecialCharecters(name),
             mark:{}
           }).then(()=>{
             setLoad({...load, submit:false})

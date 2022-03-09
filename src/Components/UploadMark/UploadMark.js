@@ -1,12 +1,14 @@
 import React,{useState, useEffect} from 'react'
 import db from "../../config/firebase"
-import { onSnapshot,collection, query, where, getDocs, getDoc,doc} from 'firebase/firestore'
+import { onSnapshot,collection, query, where, getDocs,setDoc, getDoc,doc} from 'firebase/firestore'
 import "./UploadMark.css"
-import { useLocation } from 'react-router-dom'
-
+import { useLocation, useNavigate } from 'react-router-dom'
+import { ClipLoader } from 'react-spinners'
 
 function UploadMark() {
 const location=useLocation();
+const navigate=useNavigate();
+const [load, setLoad]=useState({submit:false})
 const [students, setStudents]=useState([])
 const [studentsData, setStudentsData]=useState({})
 const [records, setRecords]=useState([])
@@ -28,34 +30,58 @@ useEffect(async()=>{
     querySnapshot.forEach((obj)=>{
         studentsData[obj.data().regNo]=mark
     })
-    console.log(studentsData);
-    
     });
   },[])
-// async function addData(rn,value,catgry){
-//  await getDoc(doc(db,"student",rn)).then((obj)=>{
-//      console.log(obj.data());
-//  })
-// }
+
+async function uploadMarks(){
+    setLoad({...load, submit:true})
+    
+    const promises=students.map(async (obj,index)=>{
+        await setDoc(doc(db, "student", obj.data().regNo),{
+            mark:{
+                sem1:{
+                    [subject]:{
+                        assignment:studentsData[obj.data().regNo].assignment,
+                        attendance:studentsData[obj.data().regNo].attendance,
+                        seminar:studentsData[obj.data().regNo].seminar,
+                        exam:studentsData[obj.data().regNo].exam,
+                        total:studentsData[obj.data().regNo].total()
+                    }
+                }
+            }
+          },{ merge: true })
+    })
+    await Promise.all(promises);
+    setLoad({...load,submit:false})
+    alert("completed");
+    navigate('/teacher')  
+}
   return (
     <div className="main row uploadMark">
         <div className="head"><div><h5>Subject Details</h5></div></div>
         <div className="table">
         <table className='stDetails'>
+            <tbody>
                 <tr className='tableFirstRow'>
-                    <th colSpan="3">Subject</th>
-                    <th colSpan="4">Sem</th> 
+                    <th>Subject</th>
+                    <th>Year</th>
+                    <th>Sem</th> 
+                    <th>Course</th> 
                 </tr>
                 <tr >
-                    <td colSpan="3">{subject}</td>
-                    <td colSpan="4">Semester {sem}</td> 
+                    <td>{subject}</td>
+                    <td >{year}</td>
+                    <td >Semester {sem}</td> 
+                    <td >{course}</td> 
                 </tr>
+            </tbody>
         </table>
         
         </div>
         <div className="head"><div><h5>Enter Internal Marks</h5></div></div>
         <div className="table">
             <table>
+            <tbody>
                 <tr className='tableFirstRow'>
                     <th>Register No</th>
                     <th>Name</th>
@@ -116,11 +142,13 @@ useEffect(async()=>{
 
                     </tr> 
                 })}
+                </tbody>
             </table>
         </div>
         <div className="btns">
-            <div><button className='submit-btn' onClick={()=>console.log(studentsData)}>Submit</button></div>
-            
+        <div><button type="button" className="submit-btn" onClick={uploadMarks}>
+                   {load.submit ?<ClipLoader size="25" color="white"/>: "Submit"}
+                 </button></div>
         </div>
     </div>
   )
