@@ -15,7 +15,7 @@ function Course() {
           setLoad(false)
 
         });
-      })
+      },[])
   return (
     <Fragment>
         
@@ -31,7 +31,7 @@ function Course() {
                 </div>
                 {
                     courses.map((obj, index)=>{
-                        return <div className="lists">
+                        return <div className="lists" key={index}>
                         <div className="title">{index+1}</div>
                         <div className="title">{obj.data().name}</div>
                         <div className="title buttons">

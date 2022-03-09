@@ -5,7 +5,7 @@ import UploadMark from '../../Components/UploadMark/UploadMark'
 function UploadMarkPage() {
   return (
     <Fragment>
-        <Header header="Teacher"></Header>
+        <Header header="Teacher Panel"></Header>
         <UploadMark></UploadMark>
     </Fragment>
   )

@@ -5,7 +5,7 @@ import Header from '../../Components/Header/Header'
 function SelectDetailsPage() {
   return (
     <Fragment>
-      <Header header="Teacher"></Header>
+      <Header header="Teacher Panel"></Header>
       <SelectDetails/>
     </Fragment>
   )

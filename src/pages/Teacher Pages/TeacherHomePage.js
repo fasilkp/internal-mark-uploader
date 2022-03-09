@@ -5,7 +5,7 @@ import Header from "../../Components/Header/Header"
 function TeacherHomePage() {
   return (
     <Fragment>
-        <Header header="Teacher" />
+        <Header header="Teacher Panel" />
         <TeacherHome/>
     </Fragment>
   )

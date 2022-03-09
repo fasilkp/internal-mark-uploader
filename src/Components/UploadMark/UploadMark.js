@@ -17,13 +17,12 @@ const[mark,setMark]=useState({
     seminar:0,
     total:function(){return this.attendance+this.assignment+this.seminar+this.exam}
 })
-
 const [marks, setMarks]=useState([])
-const {sem, course, subject}=location.state
+const {sem, course, subject,year}=location.state
 const studentRef=collection(db, "student")
 useEffect(async()=>{
     let q =await query(studentRef, where("courseId", "==", course));
-    q = await query(q, where("current_sem", "==", sem));
+    q = await query(q, where("year", "==", year));
     await getDocs(q).then((querySnapshot)=>{
     setStudents(querySnapshot.docs);
     querySnapshot.forEach((obj)=>{
@@ -42,10 +41,14 @@ useEffect(async()=>{
     <div className="main row uploadMark">
         <div className="head"><div><h5>Subject Details</h5></div></div>
         <div className="table">
-        <table>
+        <table className='stDetails'>
                 <tr className='tableFirstRow'>
-                    <td colSpan="3">Subject</td>
-                    <td colSpan="4">{subject}</td> 
+                    <th colSpan="3">Subject</th>
+                    <th colSpan="4">Sem</th> 
+                </tr>
+                <tr >
+                    <td colSpan="3">{subject}</td>
+                    <td colSpan="4">Semester {sem}</td> 
                 </tr>
         </table>
         
@@ -66,8 +69,8 @@ useEffect(async()=>{
                         return <tr key={index}>
                         <td>{obj.data().regNo}</td>
                         <td>{obj.data().name}</td>
-                        <td>
-                            <input type="number"
+                        <td htmlFor="assignmentInput1">
+                            <input type="number" id="assignmentInput1"
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].assignment} 
                             onChange={(e)=>{
                             setStudentsData({

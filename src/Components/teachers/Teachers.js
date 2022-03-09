@@ -14,7 +14,7 @@ function Teachers() {
           setTeachers(snapshot.docs);
           setLoad(false)
         });
-      })
+      },[])
     const deleteItem=async (id)=>{
         setLoad(true)
          if(window.confirm("Are you sure ? you want to delete this record")){
@@ -41,7 +41,7 @@ function Teachers() {
                 </div>
                 {
                     teachers.map((obj,index)=>{
-                        return <div className="lists">
+                        return <div className="lists" key={index}>
                         <div className="title">{obj.data().regNo}</div>
                         <div className="title">{obj.data().name}</div>
                         <div className="title buttons">

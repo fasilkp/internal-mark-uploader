@@ -13,36 +13,40 @@ function SelectDetails() {
   
   const [courses, setCourses]=useState([])
   const [sem, setSem]=useState("1")
-  const [subject, setSubject]=useState("cs")
+  const [years, setYears]=useState([])
+  const [year, setYear]=useState("")
+  const [subject, setSubject]=useState("")
   const [record, setRecord]=useState({})
-  const [course, setCourse]=useState("bsc_computer_science")
+  const [course, setCourse]=useState("bca")
   const [subLoad, setSubLoad]=useState(true)
   const [courseLoad, setCourseLoad]=useState(true)
   useEffect(()=>{
     onSnapshot(collection(db, "courses"),(snapshot)=>{
         setCourses(snapshot.docs);
+        setCourse(snapshot.docs[0].data().id)
+        async function setSubjectRecord(){
+          await setSubject(snapshot.docs[0].data()['sem'+sem].subjects[0])
+        }
+        setSubjectRecord();
         setCourseLoad(false)
     });
+    let currentYear=new Date().getFullYear();
+    for(var i=2019; i<=currentYear; i++){
+      years.push(i+'-'+(i+3))
+    }
+    setYear(years[0])
+
   },[])
   useEffect(()=>{
-    setSubLoad(true)
-    getDoc(doc(db, 'courses', course)).then((docSnap)=>{
+      getDoc(doc(db, 'courses', course)).then((docSnap)=>{
         setRecord(docSnap.data())
         setSubLoad(false)
-    });
-  },[course])
-  function replaceSpecialCharecters(str){
-    return (" "+str).replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "_").replace(/ /g, '_').toLowerCase().substr(1, str.length)
-  }
-  async function onCourseChange(e){
-    setCourse(e.target.value)
-    console.log(e.target.value);
-    await getDoc(doc(db, 'courses', course)).then((docSnap)=>{
-      setRecord(docSnap.data())
-      console.log(docSnap.data());
-    });
-    
-  }
+      });
+      if(record['sem'+sem]){
+        setSubject(record['sem'+sem].subjects[0])
+      }
+  },[course,sem])
+
 
   return (
     <div className='row admin-login select-details'>
@@ -54,9 +58,11 @@ function SelectDetails() {
                 {
                   courseLoad ? <div className='form-select'><ClipLoader size="15px"></ClipLoader></div> :
                 
-                <select className="form-select" value={course} onChange={onCourseChange} aria-label="Default select example">
+                <select className="form-select" value={course} onChange={(e)=>{
+                  setSubLoad(true)
+                  setCourse(e.target.value)}}>
                 {courses.map((obj,index)=>{
-                      return <option key={index} value={replaceSpecialCharecters(obj.data().name)}>{obj.data().name}</option>
+                      return <option key={index} value={obj.data().id}>{obj.data().name}</option>
                 })}
                 </select>}
             </div>
@@ -64,8 +70,8 @@ function SelectDetails() {
                 <label className="form-label">Current Sem</label>
                 <select className="form-select" value={sem} onChange={(e)=>{
                   setSem(e.target.value)
-                  console.log(record[sem].subjects)
-                  }} aria-label="Default select example">
+                  // setSubject(record['sem'+sem].subjects[0])
+                  }}>
                 <option value="1">First Semester</option>
                 <option value="2">Second Semester</option>
                 <option value="3">Third Semester</option>
@@ -75,10 +81,22 @@ function SelectDetails() {
                 </select>
             </div>
         <div className="mb-3">
+                <label className="form-label">Year</label>
+                <select className="form-select" value={year} onChange={(e)=>{
+                  setYear(e.target.value)}}>
+                {
+                  years.map((item, index)=>{
+                    return <option key={index} value={item}>{item}</option>
+                  })
+                }
+
+                </select>
+            </div>
+        <div className="mb-3">
                 <label className="form-label">Subject</label>
                 {subLoad ? <div className='form-select'><ClipLoader size="15px"></ClipLoader></div> :
-                <select className="form-select" value={subject} onChange={(e)=>setSubject(e.target.value)} aria-label="Default select example">
-                  {
+                <select className="form-select" value={subject} onChange={(e)=>setSubject(e.target.value)}>
+                  {record['sem'+sem] &&
                     record['sem'+sem].subjects.map((item,index)=>{
                       return <option key={index} value={item}>{item}</option>
                     })
@@ -86,7 +104,16 @@ function SelectDetails() {
                 </select>}
             </div>
         <div className="mb-3">
-            <Link to="/teacher/upload-mark" state={{sem,course,subject}} className="links"><button className="login-btn">Enter</button>  </Link>
+            <Link to="/teacher/upload-mark" state={{sem,course,subject,year}} className="links"><button className="login-btn">Enter</button>  </Link>
+        </div>    
+        <div className="mb-3">
+            <button onClick={(e)=>{
+              e.preventDefault();
+              console.log(course);
+              console.log(sem);
+              console.log(year);
+              console.log(subject);
+            }}>Show</button>
         </div>    
           </form>
     </div>

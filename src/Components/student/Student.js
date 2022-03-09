@@ -7,22 +7,21 @@ import db from "../../config/firebase"
 import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore"
 import {ClipLoader} from 'react-spinners'
 function Student() {
-    const [load, setLoad]=useState(true);
+    const [load, setLoad]=useState({page:true, delete:false});
     const [students, setStudents]=useState([]);
     useEffect(()=>{
         onSnapshot(collection(db, "student"),(snapshot)=>{
             setStudents(snapshot.docs);
-                setLoad(false)
+            setLoad({...load, page:false})
           });
-        
-      })
+      },[])
     const deleteItem=async (id)=>{
-        setLoad(true)
+        setLoad({...load, delete:true})
          if(window.confirm("Are you sure ? you want to delete this record")){
             await deleteDoc(doc(db, "student", id)).then(()=>{
-                console.log("deleted");
-                setLoad(false)
+                setLoad({...load, delete:false})
             })
+           
         }
         else{
             console.log("canceled");
@@ -31,7 +30,8 @@ function Student() {
   return (
     <Fragment>
     <div className="text">Student</div>
-    {load && <div className="loader"><ClipLoader></ClipLoader> </div>}
+    {load.page && <div className="loader"><ClipLoader></ClipLoader> </div>}
+    {load.delete && <div className="loader"><ClipLoader></ClipLoader> </div>}
     <div>
         <div className="container">
             <div className="list-container">
@@ -39,7 +39,7 @@ function Student() {
                     <div className="head">Reg No</div>
                     <div className="head">Name</div>
                     <div className="head">Course</div>
-                    <div className="head">Sem</div>
+                    <div className="head">Year</div>
                     <div className="head">Edits</div>
                 </div>
                 
@@ -49,7 +49,7 @@ function Student() {
                         <div className="title">{obj.data().regNo}</div>
                         <div className="title">{obj.data().name}</div>
                         <div className="title">{obj.data().course}</div>
-                        <div className="title">{obj.data().current_sem}</div>
+                        <div className="title">{obj.data().year}</div>
                         <div className="title buttons">
                             <Link to='/admin/edit-student' state={{obj:obj.data()}}><div className="list-icon"><FontAwesomeIcon icon="pen"/></div></Link>
                             <div className="list-icon" onClick={()=>deleteItem(obj.data().regNo)}><FontAwesomeIcon icon="trash"/></div>
