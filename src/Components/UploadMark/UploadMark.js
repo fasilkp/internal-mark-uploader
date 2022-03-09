@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import db from "../../config/firebase"
-import { onSnapshot,collection, query, where, getDocs,setDoc, getDoc,doc} from 'firebase/firestore'
+import {collection, query, where, getDocs,setDoc,doc} from 'firebase/firestore'
 import "./UploadMark.css"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'

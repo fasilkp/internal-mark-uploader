@@ -106,15 +106,7 @@ function SelectDetails() {
         <div className="mb-3">
             <Link to="/teacher/upload-mark" state={{sem,course,subject,year}} className="links"><button className="login-btn">Enter</button>  </Link>
         </div>    
-        <div className="mb-3">
-            <button onClick={(e)=>{
-              e.preventDefault();
-              console.log(course);
-              console.log(sem);
-              console.log(year);
-              console.log(subject);
-            }}>Show</button>
-        </div>    
+   
           </form>
     </div>
     </div>
