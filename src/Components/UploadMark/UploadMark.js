@@ -39,15 +39,19 @@ async function uploadMarks(){
     const promises=students.map(async (obj,index)=>{
         await setDoc(doc(db, "student", obj.data().regNo),{
             mark:{
-                sem1:{
-                    [subject]:{
+                ...obj.data().mark,
+                ['sem'+sem]:[
+                    ...obj.data().mark['sem'+sem],
+                    {   
+                        subCode:"abcd",
+                        subName:subject,
                         assignment:studentsData[obj.data().regNo].assignment,
                         attendance:studentsData[obj.data().regNo].attendance,
                         seminar:studentsData[obj.data().regNo].seminar,
                         exam:studentsData[obj.data().regNo].exam,
                         total:studentsData[obj.data().regNo].total()
                     }
-                }
+                ]
             }
           },{ merge: true })
     })

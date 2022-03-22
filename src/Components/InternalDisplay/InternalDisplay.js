@@ -9,27 +9,46 @@ import { Fragment } from 'react/cjs/react.production.min';
 import { faHourglass1 } from '@fortawesome/free-solid-svg-icons';
 
 function InternalDisplay() {
-const loaction =useLocation();
-const {regNo, sem}=loaction.state
+const location =useLocation();
+const {regNo, sem}=location.state
 const [stDoc, setStDoc]=useState([])
 const [name, setName]=useState('')
 const [load, setLoad]=useState(true)
 const [docExist, setDocExist]=useState(false)
 useEffect(async()=>{
     const docSnap = await getDoc(doc(db, 'student', regNo));
-    if (docSnap.exists()) {
-        setDocExist(true)
-        setLoad(false)
-        setStDoc(docSnap.data().mark[`sem${sem.value}`])
-        setName(docSnap.data().name)
-        
+    setName(docSnap.data().name)
+    if (docSnap.data().mark['sem'+sem.value]) {
+        console.log('sem'+sem.value);
+        console.log(docSnap.data().mark['sem'+sem.value]);
+        setStDoc(docSnap.data().mark['sem'+sem.value])
       } else {
         console.log("No such document!");
-        setDocExist(false)
-        setLoad(false)
       }
-})
+},[])
   return(
+//   <div>
+//       <h1>hello</h1>
+//       <h1>hello</h1>
+//       <h1>hello</h1>
+//       <h1>hello</h1>
+//       <h1 onClick={async ()=>{
+//           console.log(stDoc);
+//           console.log(sem.value, sem.name);
+//           const docSnap = await getDoc(doc(db, 'student', regNo));
+//           console.log(docSnap);
+//           console.log(stDoc);
+//           }}>hello</h1>
+//         {
+//             stDoc[0] ? stDoc.map((obj)=>{
+//                 return <h1>
+//                     <pre>{obj.subName}</pre>
+//                     <pre>{obj.subCode}</pre>
+//                     <pre>{obj.total}</pre>
+//                     </h1>
+//             }) : "no such document"
+//         }
+//   </div>
 
    <div className='row InternalDisplay'>
         <div className="col-md-12 text"><h5>Student Details</h5></div>
@@ -50,10 +69,11 @@ useEffect(async()=>{
             </table>
         </div>
          <div className="col-md-12 text"><h5>Internal Marks</h5></div>
-         {!load ?<div className="col-md-12">
+         <div className="col-md-12">
             <table className='mrk-details'>
                 <tr className='tableFirstRow'>
                     <th>Subject</th>
+                    <th>Code</th>
                     <th>Uploaded By</th>
                     <th>Attendance</th>
                     <th>Assignment</th>
@@ -62,19 +82,20 @@ useEffect(async()=>{
                     <th>Total</th>
                 </tr>
                 
-                   { stDoc ? stDoc.map((obj,index)=>{
+                   { stDoc[0]  ? stDoc.map((obj,index)=>{
                             return <tr key={index}>
-                            <td>{obj.name}</td>
+                            <td>{obj.subName}</td>
+                            <td>{obj.subCode}</td>
                             <td>name</td>
-                                <td>{obj.a}</td>
-                                <td>{obj.b}</td>
-                                <td>{obj.c}</td>
-                                <td>{obj.d}</td>
-                                <td>{obj.t}</td>
+                                <td>{obj.assignment}</td>
+                                <td>{obj.attendance}</td>
+                                <td>{obj.seminar}</td>
+                                <td>{obj.exam}</td>
+                                <td>{obj.total}</td>
                             </tr>
                     }) : <td colspan="7">not uploaded</td>}
             </table>
-        </div> : <td colspan="7"><ClipLoader></ClipLoader></td> } 
+        </div>
     </div>
   )
 }
