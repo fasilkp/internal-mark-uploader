@@ -11,44 +11,26 @@ import { faHourglass1 } from '@fortawesome/free-solid-svg-icons';
 function InternalDisplay() {
 const location =useLocation();
 const {regNo, sem}=location.state
-const [stDoc, setStDoc]=useState([])
+const [stDoc, setStDoc]=useState({})
 const [name, setName]=useState('')
 const [load, setLoad]=useState(true)
 const [docExist, setDocExist]=useState(false)
 useEffect(async()=>{
     const docSnap = await getDoc(doc(db, 'student', regNo));
     setName(docSnap.data().name)
-    if (docSnap.data().mark['sem'+sem.value]) {
-        console.log('sem'+sem.value);
-        console.log(docSnap.data().mark['sem'+sem.value]);
-        setStDoc(docSnap.data().mark['sem'+sem.value])
-      } else {
-        console.log("No such document!");
-      }
+    try{
+        if (docSnap.data().mark['sem'+sem.value]) {
+            setStDoc(docSnap.data().mark['sem'+sem.value])
+          } else {
+            console.log("No such document!");
+          }
+    }catch(error){
+        if(error.message==="Cannot read properties of undefined (reading 'sem1')"){
+            alert("Not Uploaded")
+        }  
+    }
 },[])
   return(
-//   <div>
-//       <h1>hello</h1>
-//       <h1>hello</h1>
-//       <h1>hello</h1>
-//       <h1>hello</h1>
-//       <h1 onClick={async ()=>{
-//           console.log(stDoc);
-//           console.log(sem.value, sem.name);
-//           const docSnap = await getDoc(doc(db, 'student', regNo));
-//           console.log(docSnap);
-//           console.log(stDoc);
-//           }}>hello</h1>
-//         {
-//             stDoc[0] ? stDoc.map((obj)=>{
-//                 return <h1>
-//                     <pre>{obj.subName}</pre>
-//                     <pre>{obj.subCode}</pre>
-//                     <pre>{obj.total}</pre>
-//                     </h1>
-//             }) : "no such document"
-//         }
-//   </div>
 
    <div className='row InternalDisplay'>
         <div className="col-md-12 text"><h5>Student Details</h5></div>
@@ -82,18 +64,18 @@ useEffect(async()=>{
                     <th>Total</th>
                 </tr>
                 
-                   { stDoc[0]  ? stDoc.map((obj,index)=>{
+                   { Object.values(stDoc).map((obj,index)=>{
                             return <tr key={index}>
                             <td>{obj.subName}</td>
                             <td>{obj.subCode}</td>
                             <td>name</td>
-                                <td>{obj.assignment}</td>
-                                <td>{obj.attendance}</td>
-                                <td>{obj.seminar}</td>
-                                <td>{obj.exam}</td>
-                                <td>{obj.total}</td>
+                            <td>{obj.assignment}</td>
+                            <td>{obj.attendance}</td>
+                            <td>{obj.seminar}</td>
+                            <td>{obj.exam}</td>
+                            <td>{obj.total}</td>
                             </tr>
-                    }) : <td colspan="7">not uploaded</td>}
+                    })}
             </table>
         </div>
     </div>

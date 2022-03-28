@@ -33,6 +33,10 @@
     background-color: #11101D;
     color: white;
 }
+.add-subject-input, #add-course-name{
+    border: 2px solid rgba(0, 0, 0, 0.118);
+    
+}
 
 .add-subject-input:focus, #button-addon2:focus,.btn:focus{
     box-shadow: none;

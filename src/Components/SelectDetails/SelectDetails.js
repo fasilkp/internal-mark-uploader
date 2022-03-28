@@ -2,7 +2,7 @@ import React, {useEffect,useState} from 'react'
 import db from "../../config/firebase"
 import { collection, onSnapshot, doc, getDoc } from "firebase/firestore"
 import { ClipLoader } from 'react-spinners'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 import "../../common styles/Login.css"
 import "../SelectDetails/SelectDetails.css"
@@ -10,7 +10,8 @@ import "../SelectDetails/SelectDetails.css"
 
 
 function SelectDetails() {
-  
+  const location = useLocation();
+  const {urlPath}=location.state
   const [courses, setCourses]=useState([])
   const [sem, setSem]=useState("1")
   const [years, setYears]=useState([])
@@ -96,17 +97,17 @@ function SelectDetails() {
                 <label className="form-label">Subject</label>
                 {subLoad ? <div className='form-select'><ClipLoader size="15px"></ClipLoader></div> :
                 <select className="form-select" value={subject} onChange={(e)=>setSubject(e.target.value)}>
+                  <option>Select Subjec</option>
                   {record['sem'+sem] &&
                     record['sem'+sem].subjects.map((item,index)=>{
-                      return <option key={index} value={item}>{item}</option>
+                      return <option key={index} value={item.subCode}>{item.subName}</option>
                     })
                   }
                 </select>}
             </div>
         <div className="mb-3">
-            <Link to="/teacher/upload-mark" state={{sem,course,subject,year}} className="links"><button className="login-btn">Enter</button>  </Link>
+            <Link to={`/teacher/${urlPath}`} state={{sem,course,subject,year}} className="links"><button className="login-btn">Enter</button>  </Link>
         </div>    
-   
           </form>
     </div>
     </div>

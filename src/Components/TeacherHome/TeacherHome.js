@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import "./TeacherHome.css"
 import upload from "../../assets/images/upload.png"
 import view from "../../assets/images/view.png"
@@ -12,7 +12,7 @@ function TeacherHome() {
             <span>Internal Marks</span>
         </div>
         <div className="boxes">
-            <Link to='/teacher/select-details' className='links'>
+            <Link to='/teacher/select-details' state={{urlPath:'upload-mark'}} className='links'>
             <div className="box">
                 <div className="box-image"><img src={upload} alt="" /></div>
                 <div className="disc">
@@ -22,6 +22,7 @@ function TeacherHome() {
                 </div>
             </div>
             </Link>
+            <Link to='/teacher/select-details' state={{urlPath:'view-internal'}} className='links'>
             <div className="box">
                 <div className="box-image"><img src={view} alt="" /></div>
                 <div className="disc">
@@ -30,14 +31,15 @@ function TeacherHome() {
                     <div className="box-btn"><button className="box-btn">&gt;</button></div>
                 </div>
             </div>
-            <div className="box">
+            </Link>
+           <Link to="/teacher/select-details" state={{urlPath:'edit-internal'}} className='links'> <div className="box">
                 <div className="box-image"><img src={edit} alt="" /></div>
                 <div className="disc">
                     <span className="box-head">Edit</span>
                     <span className="box-disc">Edit Internal Marks</span>
                     <div className="box-btn"><button className="box-btn">&gt;</button></div>
                 </div>
-            </div>
+            </div></Link>
         </div>
     </div>
   )

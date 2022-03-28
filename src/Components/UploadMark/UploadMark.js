@@ -1,8 +1,9 @@
 import React,{useState, useEffect} from 'react'
 import db from "../../config/firebase"
-import {collection, query, where, getDocs,setDoc,doc} from 'firebase/firestore'
+import {collection, query, where, getDocs,setDoc,doc,addDoc} from 'firebase/firestore'
 import "./UploadMark.css"
 import { useLocation, useNavigate } from 'react-router-dom'
+import { replaceSpecialCharecters } from '../../commonFunctions/idGenerate'
 import { ClipLoader } from 'react-spinners'
 
 function UploadMark() {
@@ -40,10 +41,10 @@ async function uploadMarks(){
         await setDoc(doc(db, "student", obj.data().regNo),{
             mark:{
                 ...obj.data().mark,
-                ['sem'+sem]:[
+                ['sem'+sem]:{
                     ...obj.data().mark['sem'+sem],
-                    {   
-                        subCode:"abcd",
+                    [subject]:{   
+                        subCode: replaceSpecialCharecters(subject),
                         subName:subject,
                         assignment:studentsData[obj.data().regNo].assignment,
                         attendance:studentsData[obj.data().regNo].attendance,
@@ -51,7 +52,7 @@ async function uploadMarks(){
                         exam:studentsData[obj.data().regNo].exam,
                         total:studentsData[obj.data().regNo].total()
                     }
-                ]
+                }
             }
           },{ merge: true })
     })
@@ -100,7 +101,7 @@ async function uploadMarks(){
                         <td>{obj.data().regNo}</td>
                         <td>{obj.data().name}</td>
                         <td htmlFor="assignmentInput1">
-                            <input type="number" id="assignmentInput1"
+                            <input type="number" id="assignmentInput1" placeholder='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].assignment} 
                             onChange={(e)=>{
                             setStudentsData({
@@ -110,7 +111,7 @@ async function uploadMarks(){
                             })}}/>
                         </td>
                         <td>
-                            <input type="number"
+                            <input type="number" placeholder='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].attendance} 
                             onChange={(e)=>{
                             setStudentsData({
@@ -120,7 +121,7 @@ async function uploadMarks(){
                             })}}/>
                         </td>
                         <td>
-                            <input type="number"
+                            <input type="number" placeholder='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].exam}
                             onChange={(e)=>{
                             setStudentsData({
@@ -130,7 +131,7 @@ async function uploadMarks(){
                             })}}/>
                         </td>
                         <td>
-                            <input type="number"
+                            <input type="number" placeholder='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].seminar} 
                             onChange={(e)=>{
                             setStudentsData({
@@ -140,7 +141,7 @@ async function uploadMarks(){
                             })}}/>
                         </td>
                         <td>
-                            <input type="number" disabled 
+                            <input type="number" disabled  placeholder='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].total()}/>
                         </td>
 

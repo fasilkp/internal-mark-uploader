@@ -1,7 +1,7 @@
 .main{
     display: flex;
     justify-content: center;
-    min-height: 75vh;
+    min-height: 100vh;
     padding: 0px;
     margin-top: 50px;
 }
@@ -54,10 +54,10 @@ tr:nth-child(odd){
 }
 input{
     all: unset;
-    width: 100%;
+    width: 50%;
     height: 100%;
     background:none;
-    border-radius: 7px;
+    border-bottom: 1px solid #11101d52;
 }
 
 input:disabled{

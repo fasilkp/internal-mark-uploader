@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import db from '../../config/firebase'
 import { onSnapshot, collection,setDoc, doc , getDoc} from 'firebase/firestore'
 import { Fragment } from 'react/cjs/react.development'
@@ -44,8 +44,8 @@ function AddStudent() {
             mark:{}
           }).then(()=>{
             setLoad({...load, submit:false})
-            navigate('/admin/student')
             alert("Successfully Inserted");
+            window.loaction.reload()
           })
         }
     });  
@@ -69,7 +69,7 @@ function AddStudent() {
             <div className="mb-3">
               <label className="form-label">Student Name</label>
               <input type="text" className="form-control" id="name" value={name}
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e)=>setName(e.target.value.toUpperCase())}
               onKeyUp={checkFormFill}
               placeholder='Enter Student Name' />
             </div>
@@ -100,6 +100,9 @@ function AddStudent() {
                 }
             </select>
             </div>
+            <div className="mb-3">
+                <Link to="/admin/student-details-upload">Upload more Students</Link>
+            </div>
             
             <div className="btn">
                <button type="reset" className="btn btn-danger">reset</button>
@@ -109,6 +112,7 @@ function AddStudent() {
             </div>
           </form>
     </div>
+    
 </div>
 </Fragment>
   )

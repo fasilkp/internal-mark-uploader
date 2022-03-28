@@ -63,6 +63,9 @@
 .login-another:hover{
     text-decoration: underline;
 }
+.form-container #add-course-name{
+    border: 1px solid rgba(0, 0, 0, 0.206);
+}
 @media screen and (max-width: 600px) {
     .form-container.login{
       width: 90%;

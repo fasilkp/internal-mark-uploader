@@ -73,6 +73,10 @@
     border-radius: 20px;
     color: white;
 }
+.box-btn button:hover{
+    height: 50px;
+    width: 50px;
+}
 .box-image img{
     width: 90px;
 }
@@ -86,6 +90,9 @@
         flex-direction: column;
         margin: 0px;
         width: 100%;
+    }
+    .boxes a{
+        width: 95%;
     }
     .main.home{
         margin-top: 50px;
