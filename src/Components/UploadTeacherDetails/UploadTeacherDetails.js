@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as xlsx from "xlsx";
-import "./fileupload.css";
+import "../UploadStudentDetails/fileupload.css";
 import db from "../../config/firebase"
 import { setDoc, doc } from "firebase/firestore"
 import { replaceSpecialCharecters } from "../../commonFunctions/idGenerate";
@@ -8,7 +8,7 @@ import { ClipLoader } from "react-spinners";
 import {useNavigate} from 'react-router-dom'
 
 
-function UploadStudentDetails() {
+function UploadTeacherDetails() {
     const [jsonFile, setJsonFile] = useState([]);
     const [load, setLoad] = useState({upload:false});
     const [fileMessage, setFileMessage] = useState({message:"Select a file or drag here", color:"black"});
@@ -37,12 +37,12 @@ function UploadStudentDetails() {
           const json = xlsx.utils.sheet_to_json(worksheet);
           setJsonFile(json);
           if( json[0] && json[0].hasOwnProperty("name") && json[0].hasOwnProperty("regNo")
-           && json[0].hasOwnProperty("course") && json[0].hasOwnProperty("year")){
+           && json[0].hasOwnProperty("email")){
             console.log(json);
             setBtnBlock(false)
           }
           else{
-            setFileMessage({message:"please upload column names as: name, course, year, regNo",color:"red"})
+            setFileMessage({message:"please upload column names as: name, regNo, email",color:"red"})
             setBtnBlock(true)
           }
         };
@@ -52,24 +52,21 @@ function UploadStudentDetails() {
     const onHandleUpload=async ()=>{
       setLoad({...load, upload:true})
       const promises=jsonFile.map(async(obj)=>{
-        await setDoc(doc(db, "student", obj.regNo.toUpperCase()), {
-          courseId:replaceSpecialCharecters(obj.course),
+        await setDoc(doc(db, "teachers", obj.regNo.toUpperCase()), {
           regNo:obj.regNo.toUpperCase(),
           name:obj.name.toUpperCase(),
-          course:obj.course,
-          year:obj.year,
-          mark:{}
+          email:obj.email,
         })
       })
       await Promise.all(promises);
       setLoad({...load, upload:true})
       alert("completed");
-      navigate('/admin/student')
+      navigate('/admin/teacher')
       
     }
   return (
     <div className="uploadContainer">
-      <h2>Upload Student Details</h2>
+      <h2>Upload Teacher Details</h2>
       <p className="lead">
         Insert file in <span>Excel Format</span>
       </p>
@@ -110,4 +107,4 @@ function UploadStudentDetails() {
   )
 }
 
-export default UploadStudentDetails
+export default UploadTeacherDetails

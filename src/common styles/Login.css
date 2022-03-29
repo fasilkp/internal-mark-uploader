@@ -7,6 +7,12 @@
     align-items: center;
     color: #11101D;
 }
+.row.admin-login.Login{
+    margin-top: 50px;
+}
+.row.admin-login.Login h3{
+    margin-bottom: 100px;
+}
 .container-header span{
     border-bottom: 2.5px solid #11101D;
     font-size: 1.25rem;

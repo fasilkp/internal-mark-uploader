@@ -57,15 +57,30 @@ function StudentMarkView() {
                         return <tr key={index}>
                             <td>{obj.data().regNo}</td>
                             <td>{obj.data().name}</td>
-                            <td>{obj.data().mark.hasOwnProperty('sem'+sem).assignment ?
+                            <td>{
+                            obj.data().mark && obj.data().mark['sem'+sem] &&
+                            obj.data().mark['sem'+sem][subject] &&
+                            obj.data().mark['sem'+sem][subject].assignment ? 
                              obj.data().mark['sem'+sem][subject].assignment : "N/A"}</td>
-                            <td>{obj.data().mark.hasOwnProperty('sem'+sem).attendance ?
+                            <td>{
+                            obj.data().mark && obj.data().mark['sem'+sem] &&
+                            obj.data().mark['sem'+sem][subject] &&
+                            obj.data().mark['sem'+sem][subject].attendance ?
                              obj.data().mark['sem'+sem][subject].attendance : "N/A"}</td>
-                            <td>{obj.data().mark.hasOwnProperty('sem'+sem).exam ?
+                            <td>{
+                            obj.data().mark && obj.data().mark['sem'+sem] &&
+                            obj.data().mark['sem'+sem][subject] &&
+                            obj.data().mark['sem'+sem][subject].exam  ?
                              obj.data().mark['sem'+sem][subject].exam : "N/A"}</td>
-                            <td>{obj.data().mark.hasOwnProperty('sem'+sem).seminar ?
+                            <td>{
+                            obj.data().mark && obj.data().mark['sem'+sem] &&
+                            obj.data().mark['sem'+sem][subject] &&
+                            obj.data().mark['sem'+sem][subject].seminar ?
                              obj.data().mark['sem'+sem][subject].seminar : "N/A"}</td>
-                            <td>{obj.data().mark.hasOwnProperty('sem'+sem).total ?
+                            <td>{
+                            obj.data().mark && obj.data().mark['sem'+sem] &&
+                            obj.data().mark['sem'+sem][subject] &&
+                            obj.data().mark['sem'+sem][subject].total?
                              obj.data().mark['sem'+sem][subject].total : "N/A"}</td>
                         </tr> 
                     })

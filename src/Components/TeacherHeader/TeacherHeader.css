@@ -1,0 +1,29 @@
+.headSection{
+    position: absolute;
+    height: 60px;
+    width: 100%;
+    background-color: #11101d;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px 0px 30px;
+}
+.dropdown .btn.btn-secondary.dropdown-toggle{
+    background-color: #fff;
+    color: #11101d;
+    min-width: 160px;
+    height: 40px;
+    display: flex;
+    padding: 5px;
+    justify-content:space-evenly;
+    align-items: center;
+}
+.dropdown-menu{
+    padding: 3px;
+}
+.dropdown-menu .dropdown-item:hover{
+    background-color: red;
+    border-radius: 5px;
+    color: white;
+}

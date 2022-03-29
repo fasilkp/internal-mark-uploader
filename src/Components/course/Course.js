@@ -13,7 +13,6 @@ function Course() {
         onSnapshot(collection(db, "courses"),(snapshot)=>{
           setCourses(snapshot.docs);
           setLoad(false)
-
         });
       },[])
   return (

@@ -82,7 +82,7 @@ function AddCourse() {
   }
   useEffect(()=>{
     setLoad(false)
-  })
+  },[])
   return (
       <Fragment>
     <div className="text">Add Course</div>

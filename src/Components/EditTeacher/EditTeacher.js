@@ -19,7 +19,7 @@ function EditTeacher(props) {
   const [load, setLoad]=useState(true);
   useEffect(()=>{
       setLoad(false)
-  }) 
+  },[]) 
 
   async function onHandleSubmit(e){
     setSubmitLoader(true)
@@ -43,15 +43,15 @@ function EditTeacher(props) {
         <form onSubmit={onHandleSubmit}>
             <div className="mb-3"><h4 className="container-header">Edit Teacher Details</h4></div>
             <div className="mb-3">
-              <label for="name" className="form-label">Teacher Name</label>
+              <label className="form-label">Teacher Name</label>
               <input type="text" value={name} onChange={(e)=>{setName(e.target.value)}} className="form-control" id="name" placeholder='Enter Student Name' />
             </div>
             <div className="mb-3">
-              <label for="reg" className="form-label">Register No</label>
+              <label className="form-label">Register No</label>
               <input type="text" value={regNo} onChange={(e)=>{setRegNo(e.target.value.toUpperCase())}} className="form-control" id="reg" placeholder='Enter Register No' />
             </div>
             <div className="mb-3">
-              <label for="email" className="form-label">Email</label>
+              <label className="form-label">Email</label>
               <input type="email" value={email} onChange={(e)=>{setEmail(e.target.value)}} className="form-control" id="email" placeholder='Enter Email Id' />
             </div>
           

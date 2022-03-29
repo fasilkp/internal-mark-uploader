@@ -1,11 +1,11 @@
 import React from 'react'
 import TeacherHome from '../../Components/TeacherHome/TeacherHome'
 import { Fragment } from 'react/cjs/react.production.min'
-import Header from "../../Components/Header/Header"
+import TeacherHeader from '../../Components/TeacherHeader/TeacherHeader'
 function TeacherHomePage() {
   return (
     <Fragment>
-        <Header header="Teacher Panel" />
+        <TeacherHeader/>
         <TeacherHome/>
     </Fragment>
   )

@@ -1,11 +1,11 @@
 import React from 'react'
-import Header from '../../Components/Header/Header'
+import TeacherHeader from '../../Components/TeacherHeader/TeacherHeader'
 import { Fragment } from 'react/cjs/react.production.min'
 import UploadMark from '../../Components/UploadMark/UploadMark'
 function UploadMarkPage() {
   return (
     <Fragment>
-        <Header header="Teacher Panel"></Header>
+        <TeacherHeader></TeacherHeader>
         <UploadMark></UploadMark>
     </Fragment>
   )

@@ -97,10 +97,10 @@ function SelectDetails() {
                 <label className="form-label">Subject</label>
                 {subLoad ? <div className='form-select'><ClipLoader size="15px"></ClipLoader></div> :
                 <select className="form-select" value={subject} onChange={(e)=>setSubject(e.target.value)}>
-                  <option>Select Subjec</option>
+                  <option>Select Subject</option>
                   {record['sem'+sem] &&
                     record['sem'+sem].subjects.map((item,index)=>{
-                      return <option key={index} value={item.subCode}>{item.subName}</option>
+                      return <option key={index} value={item.subCode}>{item.subCode} : {item.subName}</option>
                     })
                   }
                 </select>}

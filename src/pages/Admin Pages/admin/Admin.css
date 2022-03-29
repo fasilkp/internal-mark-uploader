@@ -176,9 +176,17 @@
   width: 250px;
 }
 .sidebar li .profile-details{
+  cursor: pointer;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
+  height: 100%;
+  justify-content: space-around;
+}
+.icons.user{
+  margin-left: -30px;
+  color: white;
+  font-size: 1.2rem;
 }
 .sidebar li img{
   height: 45px;
@@ -194,7 +202,8 @@
   color: #fff;
   white-space: nowrap;
 }
-.sidebar li.profile .job{
+
+.sidebar li .profile .job{
   font-size: 12px;
 }
 .sidebar .profile #log_out{
@@ -219,6 +228,7 @@
   background: -webkit-linear-gradient(to right, #d7dde8a1, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #d7dde8a1, #757F9A);
   height: 100%;
+  min-height: 100vh;
   top: 0;
   left: 78px;
   width: calc(100% - 78px);

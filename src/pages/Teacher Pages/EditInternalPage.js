@@ -1,11 +1,11 @@
 import React,{Fragment} from 'react'
 import EditInternal from '../../Components/EditInternal/EditInternal'
-import Header from '../../Components/Header/Header'
+import TeacherHeader from '../../Components/TeacherHeader/TeacherHeader'
 
 function EditInternalPage() {
   return (
     <Fragment>
-      <Header header="Teacher Panel"></Header>
+      <TeacherHeader></TeacherHeader>
       <EditInternal/>
     </Fragment>
     
