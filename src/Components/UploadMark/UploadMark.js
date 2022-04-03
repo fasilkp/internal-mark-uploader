@@ -1,5 +1,6 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect,useContext} from 'react'
 import db from "../../config/firebase"
+import {AuthContext} from "../../Context/Context"
 import {collection, query, where, getDocs,setDoc,doc,addDoc} from 'firebase/firestore'
 import "./UploadMark.css"
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -7,12 +8,12 @@ import { replaceSpecialCharecters } from '../../commonFunctions/idGenerate'
 import { ClipLoader } from 'react-spinners'
 
 function UploadMark() {
+const {user}=useContext(AuthContext)
 const location=useLocation();
 const navigate=useNavigate();
 const [load, setLoad]=useState({submit:false})
 const [students, setStudents]=useState([])
 const [studentsData, setStudentsData]=useState({})
-const [records, setRecords]=useState([])
 const[mark,setMark]=useState({
     assignment:0,
     attendance:0,
@@ -20,7 +21,6 @@ const[mark,setMark]=useState({
     seminar:0,
     total:function(){return this.attendance+this.assignment+this.seminar+this.exam}
 })
-const [marks, setMarks]=useState([])
 const {sem, course, subject,year}=location.state
 const studentRef=collection(db, "student")
 useEffect(async()=>{
@@ -45,6 +45,8 @@ async function uploadMarks(){
                     ...obj.data().mark['sem'+sem],
                     [subject]:{   
                         subCode: replaceSpecialCharecters(subject),
+                        uploadedBy:user.displayName,
+                        uploadedDate: new Date().toDateString(),
                         subName:subject,
                         assignment:studentsData[obj.data().regNo].assignment,
                         attendance:studentsData[obj.data().regNo].attendance,
@@ -63,7 +65,7 @@ async function uploadMarks(){
 }
   return (
     <div className="main row uploadMark">
-        <div className="head"><div><h5>Subject Details</h5></div></div>
+        <div className="head"><div><h6>Subject Details</h6></div></div>
         <div className="table">
         <table className='stDetails'>
             <tbody>
@@ -101,7 +103,8 @@ async function uploadMarks(){
                         <td>{obj.data().regNo}</td>
                         <td>{obj.data().name}</td>
                         <td htmlFor="assignmentInput1">
-                            <input type="number" id="assignmentInput1" placeholder='0'
+                            <input type="number" id="assignmentInput1" 
+                            defaultValue='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].assignment} 
                             onChange={(e)=>{
                             setStudentsData({
@@ -111,7 +114,8 @@ async function uploadMarks(){
                             })}}/>
                         </td>
                         <td>
-                            <input type="number" placeholder='0'
+                            <input type="number"
+                            defaultValue='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].attendance} 
                             onChange={(e)=>{
                             setStudentsData({
@@ -121,7 +125,8 @@ async function uploadMarks(){
                             })}}/>
                         </td>
                         <td>
-                            <input type="number" placeholder='0'
+                            <input type="number"
+                            defaultValue='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].exam}
                             onChange={(e)=>{
                             setStudentsData({
@@ -131,7 +136,8 @@ async function uploadMarks(){
                             })}}/>
                         </td>
                         <td>
-                            <input type="number" placeholder='0'
+                            <input type="number" 
+                            defaultValue='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].seminar} 
                             onChange={(e)=>{
                             setStudentsData({
@@ -141,7 +147,7 @@ async function uploadMarks(){
                             })}}/>
                         </td>
                         <td>
-                            <input type="number" disabled  placeholder='0'
+                            <input type="number" disabled  defaultValue='0'
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].total()}/>
                         </td>
 

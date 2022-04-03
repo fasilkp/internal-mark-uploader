@@ -1,4 +1,5 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState, useEffect,useContext} from 'react'
+import { AuthContext } from '../../Context/Context'
 import db from "../../config/firebase"
 import {collection, query, where, getDocs,setDoc,doc} from 'firebase/firestore'
 import "../UploadMark/UploadMark.css"
@@ -7,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 
 function EditInternal() {
+    const {user}=useContext(AuthContext)
     const location =useLocation();
     const navigate=useNavigate()
     const {sem, subject,course,year}=location.state;
@@ -56,14 +58,16 @@ function EditInternal() {
                     ...obj.data().mark,
                     ['sem'+sem]:{
                         ...obj.data().mark['sem'+sem],
-                        [subject]:{   
+                        [subject]:{ 
                             subCode: replaceSpecialCharecters(subject),
                             subName:subject,
                             assignment:studentsData[obj.data().regNo].mark['sem'+sem][subject].assignment,
                             attendance:studentsData[obj.data().regNo].mark['sem'+sem][subject].attendance,
                             seminar:studentsData[obj.data().regNo].mark['sem'+sem][subject].seminar,
                             exam:studentsData[obj.data().regNo].mark['sem'+sem][subject].exam,
-                            total:totalMark[obj.data().regNo]
+                            total:totalMark[obj.data().regNo],
+                            uploadedBy:user.displayName,
+                            uploadedDate: new Date().toDateString()
                         }
                     }
                 }

@@ -1,5 +1,6 @@
 .main{
     display: flex;
+    flex-direction: flex-start;
     justify-content: center;
     min-height: 100vh;
     padding: 0px;
@@ -91,18 +92,50 @@ input:disabled{
 .table>:not(caption)>*>*{
 padding: 0px;
   }
+.btns-group{
+      display: flex;
+      flex-direction: row-reverse;
+      position: relative;
+      right: 80px;
+}
+.btns-group button{
+    min-width: 100px;
+    height: 50px;
+    margin-left: 10px;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #11101D;
+    border-radius: 5px;
+    padding: 0px 10px 0px 10px;
+}
+.btns-group .share{
+    background-color: rgb(1, 104, 1);
+}
+.btns-group .btnLogo{
+    margin-left: 5px;
+    margin-top: 5px;
+}
+.table table tr th{
+    background-color: #11101d;
+    color: white;
+    font-weight: 400;
+}
 @media screen and (max-width: 500px) {
     
-.table table tr td {
+.table table tr td,.table table tr th {
         padding: 3px;
-        font-size: .5rem;
+        font-size: .3rem;
+        font-weight: 300;
+        height: 20px;
+        overflow: hidden;
+    }
+.table table tr td {
+    font-weight: 500;
     }
     .main{
         margin: 0px;
     }
-    /* .table table tr td:first-child{
-        display: none;
-    } */
     .head{
         margin-top: 0px;
     }
@@ -115,5 +148,23 @@ padding: 0px;
     .uploadMark{
         justify-content: flex-start;
         padding-top: 50px;
+    }
+    .btns-group button{
+        max-width: 50px;
+        width: 30px;
+        max-height: 30px;
+        font-size: .5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 5px;
+    }
+    .btns-group{
+        width: 100%;
+        right: 0px;
+        justify-content: center;
+    }
+    .btns-group .btnLogo{
+        font-size: .5rem;
     }
   }

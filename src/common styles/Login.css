@@ -64,6 +64,7 @@
     width: 100%;
     text-align: center;
     font-size: 1rem;
+    cursor: pointer;
     margin-top: 20px;
 }
 .login-another:hover{

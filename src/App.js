@@ -22,6 +22,8 @@ import AlertBox from './Components/AlertBox/AlertBox';
 import db from './config/firebase'
 import { getDoc,doc } from 'firebase/firestore';
 import TeacherSignUpPage from './pages/Teacher Pages/TeacherSignUpPage';
+import Test from './Components/Test/Test';
+import DownloadMark from './Components/DownloadMark/DownloadMark';
 function App() {
   const {user, setUser}=useContext(AuthContext)
   useEffect(()=>{
@@ -53,11 +55,13 @@ function App() {
           <Route path={"/teacher/login"} element={<TeacherLoginPage/>}/>
           <Route path={"/teacher/signup"} element={<TeacherSignUpPage/>}/>
           <Route path={"/teacher"} element={<TeacherHomePage/>}/>
-          <Route path={"/teacher/select-details"} element={<SelectDetailsPage/>}/>
+          <Route path={"/teacher/select-details/:urlPath"} element={<SelectDetailsPage/>}/>
           <Route path={"/teacher/upload-mark"} element={<UploadMarkPage/>}/>
           <Route path={"/teacher/teacher-view"} element={<TeacherViewPage/>}/>
           <Route path={"/teacher/edit-internal"} element={<EditInternalPage/>}/>
-          <Route path={"/teacher/view-internal"} element={<StudentMarkView/>}/>
+          <Route path={"/teacher/view-internal"} element={<TeacherViewPage/>}/>
+          <Route path={"/test"} element={<Test/>}/>
+          <Route path={"/mark/:sem/:subject/:course/:year"} element={<DownloadMark/>}/>
           
 
           {/* Student PAGES */}

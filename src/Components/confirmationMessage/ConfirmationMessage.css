@@ -5,11 +5,11 @@
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.403);
-    position: absolute;
+    position: fixed;
     left: 0px;
     top: 0px;
     color: #11101d;
-    z-index: 100;
+    z-index: 100000;
     animation-name: anime;
     animation-duration: .3s;
 }

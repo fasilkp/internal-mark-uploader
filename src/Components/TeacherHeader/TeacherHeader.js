@@ -13,12 +13,11 @@ function TeacherHeader(props) {
   const navigate = useNavigate();
   const handleSignOut=async()=>{
     await signOut(auth)
-    setConfirmationPopup(false)
-}
+    setConfirmationPopup(false)}  
   return (
     <div className="headSection">
       <div>
-        {user && user.uid !== AdminId ? (<h6>Teacher Panel</h6>) : (navigate("/teacher/login"))}
+        <h6>Teacher Panel</h6>
       </div>
       <div className="dropdown">
         <a className="btn btn-secondary dropdown-toggle" href="#" role="button"

@@ -2,16 +2,12 @@ import React, {useEffect,useState} from 'react'
 import db from "../../config/firebase"
 import { collection, onSnapshot, doc, getDoc } from "firebase/firestore"
 import { ClipLoader } from 'react-spinners'
-import { Link, useLocation } from 'react-router-dom'
-
+import { Link,useParams } from 'react-router-dom'
 import "../../common styles/Login.css"
 import "../SelectDetails/SelectDetails.css"
 
-
-
 function SelectDetails() {
-  const location = useLocation();
-  const {urlPath}=location.state
+  const {urlPath}=useParams()
   const [courses, setCourses]=useState([])
   const [sem, setSem]=useState("1")
   const [years, setYears]=useState([])
@@ -25,12 +21,8 @@ function SelectDetails() {
     onSnapshot(collection(db, "courses"),(snapshot)=>{
         setCourses(snapshot.docs);
         setCourse(snapshot.docs[0].data().id)
-        async function setSubjectRecord(){
-          await setSubject(snapshot.docs[0].data()['sem'+sem].subjects[0])
-        }
-        setSubjectRecord();
         setCourseLoad(false)
-    });
+    },[]);
     let currentYear=new Date().getFullYear();
     for(var i=2019; i<=currentYear; i++){
       years.push(i+'-'+(i+3))
@@ -43,9 +35,6 @@ function SelectDetails() {
         setRecord(docSnap.data())
         setSubLoad(false)
       });
-      if(record['sem'+sem]){
-        setSubject(record['sem'+sem].subjects[0])
-      }
   },[course,sem])
 
 
@@ -98,7 +87,7 @@ function SelectDetails() {
                 {subLoad ? <div className='form-select'><ClipLoader size="15px"></ClipLoader></div> :
                 <select className="form-select" value={subject} onChange={(e)=>setSubject(e.target.value)}>
                   <option>Select Subject</option>
-                  {record['sem'+sem] &&
+                  {record && record['sem'+sem] &&
                     record['sem'+sem].subjects.map((item,index)=>{
                       return <option key={index} value={item.subCode}>{item.subCode} : {item.subName}</option>
                     })
@@ -106,7 +95,9 @@ function SelectDetails() {
                 </select>}
             </div>
         <div className="mb-3">
-            <Link to={`/teacher/${urlPath}`} state={{sem,course,subject,year}} className="links"><button className="login-btn">Enter</button>  </Link>
+          { subject ===""
+            ? <button className="login-btn" disabled>Enter</button>
+            : <Link to={`/teacher/${urlPath}`} state={{sem,course,subject,year}} className="links"><button className="login-btn" >Enter</button>  </Link>}
         </div>    
           </form>
     </div>

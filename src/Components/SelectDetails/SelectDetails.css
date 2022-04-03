@@ -6,6 +6,9 @@
 .select-details{
     margin-top: 5%;
 }
+.login-btn:disabled{
+    background-color: #11101dde;
+}
 @media screen and (max-width: 500px) {
     .form-container{
         width: 85%;
