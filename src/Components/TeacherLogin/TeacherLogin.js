@@ -21,6 +21,11 @@ function TeacherLogin() {
         navigate('/teacher') 
 
   },[user])
+  const demoLogin=(e)=>{
+    e.preventDefault()
+    setEmail('teacher@gmail.com')
+    setPassword('123456')
+  }
   const handleSubmit=async(e)=>{
     e.preventDefault();
     setLoad({...load,submit:true})
@@ -68,6 +73,8 @@ function TeacherLogin() {
             disabled={email==="" || password===""}
             onClick={handleSubmit}>{load.submit ?<ClipLoader size="25" color="white"/>: "Login"}</button>  
         </div>    
+        <button className="btn btn-outline-dark w-100 mt-2 d-flex justify-content-center" onClick={demoLogin} >Demo input</button>
+
           </form>
     </div>
     <Link to="/teacher/signup" className='links'><div className="login-another"><span>Don't Have Acoount ? Register</span></div></Link>
