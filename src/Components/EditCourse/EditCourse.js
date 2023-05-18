@@ -149,7 +149,7 @@ function EditCourse() {
                   onChange={(e) => {
                     setInput1({ ...input1, subCode: e.target.value });
                   }}
-                  placeholder="Enter sem Subjects"
+                  placeholder="Enter Subject Code"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
                 />
@@ -200,7 +200,7 @@ function EditCourse() {
                   onChange={(e) => {
                     setInput2({ ...input2, subCode: e.target.value });
                   }}
-                  placeholder="Enter sem Subjects"
+                  placeholder="Enter Subject Code"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
                 />
@@ -251,7 +251,7 @@ function EditCourse() {
                   onChange={(e) => {
                     setInput3({ ...input3, subCode: e.target.value });
                   }}
-                  placeholder="Enter sem Subjects"
+                  placeholder="Enter Subject Code"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
                 />
@@ -302,7 +302,7 @@ function EditCourse() {
                   onChange={(e) => {
                     setInput4({ ...input4, subCode: e.target.value });
                   }}
-                  placeholder="Enter sem Subjects"
+                  placeholder="Enter Subject Code"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
                 />
@@ -353,7 +353,7 @@ function EditCourse() {
                   onChange={(e) => {
                     setInput5({ ...input5, subCode: e.target.value });
                   }}
-                  placeholder="Enter sem Subjects"
+                  placeholder="Enter Subject Code"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
                 />
@@ -404,7 +404,7 @@ function EditCourse() {
                   onChange={(e) => {
                     setInput6({ ...input6, subCode: e.target.value });
                   }}
-                  placeholder="Enter sem Subjects"
+                  placeholder="Enter Subject Code"
                   aria-label="Recipient's username"
                   aria-describedby="button-addon2"
                 />

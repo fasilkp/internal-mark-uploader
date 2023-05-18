@@ -22,6 +22,11 @@ function AdminLogin() {
   useEffect(() => {
     if (user && user.uid == AdminId) navigate("/admin");
   }, [user]);
+  const demoLogin=(e)=>{
+    e.preventDefault()
+    setEmail('kpfasil314@gmail.com')
+    setPassword('kpfasil1234')
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoad({ ...load, submit: true });
@@ -110,6 +115,9 @@ function AdminLogin() {
                 {load.submit ? <ClipLoader size="25" color="white" /> : "Login"}
               </button>
             </div>
+            <button className="btn btn-outline-dark w-100 mt-2 d-flex justify-content-center" onClick={demoLogin} >Demo input</button>
+
+
           </form>
         </div>
         {alertPopup.status && (
