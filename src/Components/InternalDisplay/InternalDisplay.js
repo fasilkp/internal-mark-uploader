@@ -1,8 +1,7 @@
-import React, {useEffect} from 'react'
+import React, {useEffect,useState} from 'react'
 import { useLocation } from 'react-router-dom'
 import { doc, getDoc } from 'firebase/firestore';
 import db from "../../config/firebase"
-import { useState } from 'react/cjs/react.development';
 import "../UploadMark/UploadMark.css"
 
 function InternalDisplay() {
@@ -36,7 +35,7 @@ useEffect(async()=>{
             <tr className='tableFirstRow'>
                 <th>Register No</th>
                 <th>Name</th>
-                <th>Sem</th> 
+                <th>Semester</th> 
             </tr>
             <tr >
                 <td>{regNo && regNo}</td>
@@ -52,7 +51,7 @@ useEffect(async()=>{
         <table>
         <tbody>
             <tr className='tableFirstRow'>
-                <th>SubCode</th>
+                <th>SubName</th>
                 <th>Uploaded By</th>
                 <th>Assignment</th>
                 <th>Attendance</th>
@@ -62,7 +61,7 @@ useEffect(async()=>{
             </tr>
             { Object.values(stDoc).map((obj,index)=>{
                             return <tr key={index}>
-                            <td>{obj.subCode}</td>
+                            <td style={{maxWidth:"100px"}}>{obj.subName}</td>
                             <td>{obj.uploadedBy && obj.uploadedBy}</td>
                             <td>{obj.assignment}</td>
                             <td>{obj.attendance}</td>

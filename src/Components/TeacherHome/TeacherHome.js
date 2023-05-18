@@ -6,13 +6,13 @@ import edit from "../../assets/images/edit.png"
 import { Link } from 'react-router-dom'
 function TeacherHome() {
   return (
-    <div className="main home">
+    <div className="main home" style={{marginTop:"100px"}}>
         <div className="header">
             <span>Upload, View and Edit</span>
             <span>Internal Marks</span>
         </div>
         <div className="boxes">
-            <Link to='/teacher/select-details/upload-mark' state={{urlPath:'upload-mark'}} className='links'>
+            <Link to='/teacher/select-details/upload-mark' state={{urlPath:'upload-mark'}} className='links home-menu'>
             <div className="box">
                 <div className="box-image"><img src={upload} alt="" /></div>
                 <div className="disc">
@@ -22,7 +22,7 @@ function TeacherHome() {
                 </div>
             </div>
             </Link>
-            <Link to='/teacher/select-details/view-internal' state={{urlPath:'view-internal'}} className='links'>
+            <Link to='/teacher/select-details/view-internal' state={{urlPath:'view-internal'}} className='links home-menu'>
             <div className="box">
                 <div className="box-image"><img src={view} alt="" /></div>
                 <div className="disc">
@@ -32,7 +32,7 @@ function TeacherHome() {
                 </div>
             </div>
             </Link>
-           <Link to="/teacher/select-details/edit-internal" state={{urlPath:'edit-internal'}} className='links'> <div className="box">
+           <Link to="/teacher/select-details/edit-internal" state={{urlPath:'edit-internal'}} className='links home-menu'> <div className="box">
                 <div className="box-image"><img src={edit} alt="" /></div>
                 <div className="disc">
                     <span className="box-head">Edit</span>

@@ -16,7 +16,7 @@ html, body, * {
     padding: 20px;
     width: 500px;
     min-height: 330px;
-    max-height: 350px;
+    max-height: 385px;
     box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.363);
 }
 p {
@@ -184,4 +184,7 @@ p {
 }
 #file-upload::-webkit-file-upload-button{
     display: none;
+}
+.form-select.ustd-select{
+  margin-bottom: 10px;
 }

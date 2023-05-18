@@ -1,6 +1,5 @@
-import React ,{useEffect, useState} from 'react'
+import React ,{useEffect, useState,Fragment} from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Fragment } from 'react/cjs/react.development'
 import "../../common styles/containerStyles.css"
 
 import db from "../../config/firebase"
@@ -28,7 +27,7 @@ function EditTeacher(props) {
       name,
       regNo,
       email
-    }).then(()=>{
+    }, { merge: true }).then(()=>{
       setSubmitLoader(false)
       navigate('/admin/teacher')
       alert("successfully edited")
@@ -57,7 +56,9 @@ function EditTeacher(props) {
           
             <div className="btn">
                 <button type="reset" className="btn btn-danger">reset</button>
-                <button type="button" className="btn btn-primary" onClick={onHandleSubmit}>{submitLoader?<ClipLoader size="25" color="white"/>: "Submit"}</button>
+                <button type="button" className="btn btn-primary"
+                disabled={regNo==="" || email==="" || name===""}
+                 onClick={onHandleSubmit}>{submitLoader?<ClipLoader size="25" color="white"/>: "Submit"}</button>
             </div>
           </form>
     </div>

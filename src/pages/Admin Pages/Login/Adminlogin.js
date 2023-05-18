@@ -1,5 +1,4 @@
-import React from 'react'
-import { Fragment } from 'react/cjs/react.production.min'
+import React,{Fragment} from 'react'
 import AdminLogin from '../../../Components/AdminLogin/AdminLogin'
 import Header from '../../../Components/Header/Header'
 function Login() {

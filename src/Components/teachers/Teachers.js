@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState,Fragment} from 'react'
 import '../../common styles/listStyle.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment } from 'react/cjs/react.development';
 import {Link} from "react-router-dom"
 import db from "../../config/firebase"
 import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore"
@@ -36,14 +35,18 @@ function Teachers() {
             <div className="list-container">
                 <div className="list-header">
                     <div className="head">Reg No</div>
+                    <div className="head">Secret Code</div>
                     <div className="head">Name</div>
+                    <div className="head">Email</div>
                     <div className="head">Edits</div>
                 </div>
                 {
                     teachers.map((obj,index)=>{
                         return <div className="lists" key={index}>
                         <div className="title">{obj.data().regNo}</div>
+                        <div className="title">{obj.data().secretCode && obj.data().secretCode}</div>
                         <div className="title">{obj.data().name}</div>
+                        <div className="title">{obj.data().email}</div>
                         <div className="title buttons">
                             <Link to="/admin/edit-teacher" state={{obj:obj.data()}}><div className="list-icon"><FontAwesomeIcon icon="pen"/></div></Link>
                             <div className="list-icon" onClick={()=>deleteItem(obj.data().regNo)}><FontAwesomeIcon icon="trash"/></div>

@@ -12,20 +12,20 @@ function TeacherHeader(props) {
   const [confirmationPopup,setConfirmationPopup]=useState(false)
   const navigate = useNavigate();
   const handleSignOut=async()=>{
-    await signOut(auth)
+    await signOut(auth).then(()=>navigate('/teacher/login'))
     setConfirmationPopup(false)}  
   return (
     <div className="headSection">
       <div>
         <h6>Teacher Panel</h6>
       </div>
-      <div className="dropdown">
+      {props.showUser && <div className="dropdown">
         <a className="btn btn-secondary dropdown-toggle" href="#" role="button"
         id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false"><FontAwesomeIcon icon="user" /> &nbsp; &nbsp; {user &&   user.displayName }</a>
         <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <li><a className="dropdown-item" href="#" onClick={()=>setConfirmationPopup(true)}>Logout</a></li>
         </ul>
-      </div>
+      </div>}
       {confirmationPopup && <ConfirmationMessage 
       message="Do You Want To Sign Out ?"
       setPopup={()=>setConfirmationPopup(false)}

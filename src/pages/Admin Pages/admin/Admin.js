@@ -1,4 +1,4 @@
-import React, {useState,useContext,useEffect} from "react";
+import React, {useState,useContext} from "react";
 import "./Admin.css";
 import Course from "../../../Components/course/Course"
 import Teachers from "../../../Components/teachers/Teachers"
@@ -11,12 +11,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import EditTeacher from "../../../Components/EditTeacher/EditTeacher";
 import EditCourse from "../../../Components/EditCourse/EditCourse";
 import UploadStudentDetails from "../../../Components/UploadStudentDetails/UploadStudentDetails";
-import { Link,useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import { signOut} from "firebase/auth";
-import { getDoc,doc } from "firebase/firestore";
 import ConfirmationMessage from "../../../Components/confirmationMessage/ConfirmationMessage";
-import db,{ auth,AdminId } from "../../../config/firebase";
-import {useAuthState} from 'react-firebase-hooks/auth'
+import { auth,AdminId } from "../../../config/firebase";
 import { AuthContext } from "../../../Context/Context";
 import AlertBox from "../../../Components/AlertBox/AlertBox";
 import UploadTeacherDetails from "../../../Components/UploadTeacherDetails/UploadTeacherDetails";
@@ -39,15 +37,12 @@ const components = {
 function Admin(props) {
   // const {user}=useContext(AuthContext)
   //const [user,loading, error]=useAuthState(auth)
-  const {user,setUser}=useContext(AuthContext)
-  const AdminId="XUdwuN3g3la7QYDQDy2XOnccM5k1"
-  const [record,setRecord]=useState([])
+  const {user}=useContext(AuthContext)
   const [confirmatioPopup,setConfirmationPopup]=useState(false)
   const [alertPopup,setAlertPopup]=useState({status:false, message:"SuccessFull",icon:'circle-exclamation'})
-  const navigate=useNavigate()
   const handleSignOut=async()=>{
     setConfirmationPopup(false)
-    let status=await signOut(auth)
+    await signOut(auth)
     setAlertPopup({message:"SuccessFully Signed Out", status:true}) 
   }
   const TagName = components[props.tag];
@@ -59,7 +54,7 @@ function Admin(props) {
   }
   const [clicked, setClicked]=useState(obj) 
   return (
-    <div>
+      <div>
       <div className={sideBarOpened?"sidebar open" : "sidebar"}>
         <div className="logo-details">
           {sideBarOpened?<div className="logo_name">Internal Mark Uploader</div>:""}
@@ -93,7 +88,7 @@ function Admin(props) {
             </Link>
             <span className="tooltip">Teachers</span>
           </li>
-          <li className="profile" onClick={()=>setConfirmationPopup(true)}>
+          {(user && user.uid==AdminId) ?<li className="profile" onClick={()=>setConfirmationPopup(true)}>
             <div className="profile-details">
             <FontAwesomeIcon icon="user" className="icons user" />
               <div className="name_job">
@@ -101,11 +96,14 @@ function Admin(props) {
               </div>
             </div>
             <i className="bx bx-log-out" id="log_out"></i>
-          </li>
+          </li> : ""}
         </ul>
       </div>
       <section className="home-section">
-        {(user && user.uid==AdminId) ? <TagName/> : navigate('/admin/login')}
+        {(user && user.uid==AdminId) ? <TagName/> : <div className="login-container">
+          <h6>Please Login</h6>
+          <Link to="/admin/login" className="login-btn">Login</Link>
+          </div> }
       </section>
       {confirmatioPopup && <ConfirmationMessage 
       message="Do You Want To Sign Out ?"

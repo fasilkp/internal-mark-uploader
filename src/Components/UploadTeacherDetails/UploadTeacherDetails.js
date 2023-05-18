@@ -3,7 +3,6 @@ import * as xlsx from "xlsx";
 import "../UploadStudentDetails/fileupload.css";
 import db from "../../config/firebase"
 import { setDoc, doc } from "firebase/firestore"
-import { replaceSpecialCharecters } from "../../commonFunctions/idGenerate";
 import { ClipLoader } from "react-spinners";
 import {useNavigate} from 'react-router-dom'
 
@@ -49,6 +48,11 @@ function UploadTeacherDetails() {
         reader.readAsArrayBuffer(e.target.files[0]);
       }
     };
+    function randomNumber() {
+      const min = 1;
+      const max = 100;
+      return parseInt((min + Math.random() * (max - min))*1000000);
+    }
     const onHandleUpload=async ()=>{
       setLoad({...load, upload:true})
       const promises=jsonFile.map(async(obj)=>{
@@ -56,6 +60,7 @@ function UploadTeacherDetails() {
           regNo:obj.regNo.toUpperCase(),
           name:obj.name.toUpperCase(),
           email:obj.email,
+          secretCode:randomNumber()
         })
       })
       await Promise.all(promises);

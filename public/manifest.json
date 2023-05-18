@@ -1,6 +1,6 @@
 {
-  "short_name": "IMU",
-  "name": "Internal Mark Uploader",
+  "short_name": "MarkMe",
+  "name": "MarkMe",
   "icons": [
     {
       "src": "favicon.ico",

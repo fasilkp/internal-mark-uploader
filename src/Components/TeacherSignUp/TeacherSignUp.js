@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import { Fragment, useState } from 'react';
 import "../../common styles/Login.css";
 import {createUserWithEmailAndPassword,updateProfile} from 'firebase/auth'
-import {AdminId, auth} from '../../config/firebase'
+import { auth} from '../../config/firebase'
 import { AuthContext } from '../../Context/Context';
 import {useNavigate } from 'react-router-dom';
 import AlertBox from '../AlertBox/AlertBox';
@@ -14,6 +14,7 @@ import db from '../../config/firebase'
 function TeacherSignUp() {
   const [email, setEmail]=useState("")
   const [regNo, setRegNo]=useState("")
+  const [secretCode, setSecretCode]=useState("")
   const [load,setLoad]=useState({submit:false})
   const [password, setPassword]=useState("")
   const navigate=useNavigate()
@@ -26,7 +27,7 @@ function TeacherSignUp() {
     try{
         await getDoc(doc(db,'teachers', regNo))
         .then((snapShot)=>{
-        if(snapShot.data().email===email){
+        if(snapShot.data().email===email && snapShot.data().secretCode==secretCode){
             createUserWithEmailAndPassword(auth, email, password)
             .then(async(userCredential) => {
                 const user = userCredential.user;
@@ -40,7 +41,8 @@ function TeacherSignUp() {
             })
         }
         else{
-
+          setAlertPopup({...alertPopup,message:"Sign Up failed ",status:true,icon:"circle-xmark"})
+          setLoad({...load,submit:false})
         }
     })
     }catch(error){
@@ -75,7 +77,7 @@ function TeacherSignUp() {
   
   return ( 
     <Fragment>
-  <div className='row admin-login Login' style={{marginTop:"200px"}}>
+  <div className='row admin-login Login' style={{marginTop:"250px"}}>
         <h3 className="login-main-header">Sign Up Into Internal Mark Uploader</h3>
         <div className="form-container login">
         <form>
@@ -89,11 +91,17 @@ function TeacherSignUp() {
                   <input type="email" value={regNo} onChange={(e)=>setRegNo(e.target.value.toUpperCase())} className="form-control" placeholder='Enter Your Email' id="exampleInputEmail1" aria-describedby="emailHelp" />
         </div>
         <div className="mb-3">
+                  <label className="form-label">Secret Code</label>
+                  <input type="text" value={secretCode} onChange={(e)=>setSecretCode(e.target.value)} className="form-control" placeholder='Enter Secret Code' id="exampleInputEmail1" aria-describedby="emailHelp" />
+        </div>
+        <div className="mb-3">
                   <label className="form-label">Password</label>
                   <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Enter Your Password' className="form-control" id="exampleInputPassword1"/>
         </div>
         <div className="mb-3">
-            <button className="login-btn" onClick={handleSubmit}>{load.submit ?<ClipLoader size="25" color="white"/>: "Login"}</button>  
+            <button className="login-btn"
+             disabled={email==="" || regNo==="" || secretCode==="" || password===""}
+             onClick={handleSubmit}>{load.submit ?<ClipLoader size="25" color="white"/>: "Register"}</button>  
         </div>    
           </form>
     </div>

@@ -54,7 +54,7 @@ function DownloadMark() {
     }
   return (
     <div className="main">
-        <h4 style={{textAlign:"center", marginTop:"-200px"}}>Please Wait!! Downloading Will Start Automatically...</h4>
+        <h4 style={{textAlign:"center", marginTop:"200px"}}>Please Wait!! Downloading Will Start Automatically...</h4>
         <h6 style={{textAlign:"center"}}> If Downloading Not Started  <a href={`/mark/${sem}/${subject}/${course}/${year}`}>Restart</a></h6>
     </div>
   )

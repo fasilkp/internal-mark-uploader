@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect,Fragment} from 'react'
 import { useNavigate,Link } from 'react-router-dom'
 import db from '../../config/firebase'
 import { onSnapshot, collection,setDoc, doc , getDoc} from 'firebase/firestore'
-import { Fragment } from 'react/cjs/react.development'
 import "../../common styles/containerStyles.css"
 import { ClipLoader } from 'react-spinners'
 import {replaceSpecialCharecters} from "../../commonFunctions/idGenerate"
@@ -44,8 +43,9 @@ function AddStudent() {
             mark:{}
           }).then(()=>{
             setLoad({...load, submit:false})
-            alert("Successfully Inserted");
-            window.loaction.reload()
+            alert("Successfully added Student "+name);
+            setName("") 
+            setRegNo("")
           })
         }
     });  

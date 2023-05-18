@@ -1,5 +1,4 @@
-import React from 'react'
-import { Fragment } from 'react/cjs/react.production.min'
+import React,{ Fragment } from 'react'
 import TeacherLogin from '../../Components/TeacherLogin/TeacherLogin'
 import Header from '../../Components/Header/Header'
 function TeacherLoginPage() {

@@ -1,10 +1,9 @@
-import React ,{useEffect,useState}from 'react'
+import React ,{useEffect,useState,Fragment}from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ClipLoader } from 'react-spinners'
 import db from '../../config/firebase'
-import { onSnapshot, collection, docs, setDoc, doc } from 'firebase/firestore'
+import { onSnapshot, collection, docs, setDoc, doc,deleteDoc } from 'firebase/firestore'
 import { useLocation } from 'react-router-dom'
-import { Fragment } from 'react/cjs/react.development'
 import "../../common styles/containerStyles.css"
 
 function EditStudent() {
@@ -24,7 +23,7 @@ function EditStudent() {
     onSnapshot(collection(db, "courses"),(snapshot)=>{
       setCourses(snapshot.docs);
       setLoad(false)
-    });
+    },[]);
     let currentYear=new Date().getFullYear();
     for(var i=2019; i<=currentYear; i++){
       years.push(i+'-'+(i+3))
@@ -33,6 +32,11 @@ function EditStudent() {
   },[]) 
   async function handleSubmit(){
       setSubmitLoader(true)
+      if(regNo!==obj.regNo){
+        await deleteDoc(doc(db, "student", obj.regNo)).then(()=>{
+          console.log("deleted");
+        })
+      }
       await setDoc(doc(db, "student", regNo), {
         regNo,name,course,year
       }).then(()=>{
@@ -56,11 +60,11 @@ function EditStudent() {
     <div className="main">
     <div className="form-container">
         <form onSubmit={(e)=>{e.preventDefault()}}>
-            <div className="mb-3"><h4 className="container-header">Add Student Details</h4></div>
+            <div className="mb-3"><h4 className="container-header">Edit Student Details</h4></div>
             <div className="mb-3">
               <label for="name" className="form-label">Student Name</label>
               <input type="text" className="form-control" id="name" value={name} 
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e)=>setName(e.target.value.toUpperCase())}
               onKeyUp={checkFormFill}
               placeholder='Enter Student Name' />
             </div>

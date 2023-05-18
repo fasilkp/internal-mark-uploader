@@ -21,6 +21,10 @@ function EditInternal() {
         let q =await query(studentRef, where("courseId", "==", course));
         q = await query(q, where("year", "==", year));
         await getDocs(q).then((querySnapshot)=>{
+            if(!querySnapshot?.docs?.[0]?.data()?.mark?.['sem'+sem]?.[subject]?.uploadedDate){
+               alert("no data");
+               navigate('/teacher')
+            }
         setStudents(querySnapshot.docs);
         querySnapshot.docs.map((obj)=>{
             studentsData[obj.data().regNo]=obj.data()
@@ -30,7 +34,7 @@ function EditInternal() {
         });
         
       },[])
-      const editStudentData=(e,regNo,ctgry)=>{
+      const editStudentData=(e,regNo,ctgry,max)=>{
         setStudentsData({
             ...studentsData,
             [regNo]:{
@@ -41,7 +45,7 @@ function EditInternal() {
                         ...studentsData[regNo].mark['sem'+sem],
                         [subject]:{
                             ...studentsData[regNo].mark['sem'+sem][subject],
-                            [ctgry]:parseInt(e.target.value)>5 ? 5 : parseInt(e.target.value)<0 ? 0 : parseInt(e.target.value),
+                            [ctgry]:parseInt(e.target.value)>max ? max : parseInt(e.target.value)<0 ? 0 : parseInt(e.target.value),
                             total:totalMark[regNo]
                         }
                     }
@@ -66,7 +70,7 @@ function EditInternal() {
                             seminar:studentsData[obj.data().regNo].mark['sem'+sem][subject].seminar,
                             exam:studentsData[obj.data().regNo].mark['sem'+sem][subject].exam,
                             total:totalMark[obj.data().regNo],
-                            uploadedBy:user.displayName,
+                            uploadedBy:user.displayName+"(edited)",
                             uploadedDate: new Date().toDateString()
                         }
                     }
@@ -92,7 +96,7 @@ function EditInternal() {
                     <th>Course</th> 
                 </tr>
                 <tr >
-                    <td>{subject}</td>
+                    <td>{Object.values(studentsData)[0] && Object.values(studentsData)[0].mark['sem'+sem][subject].subName }</td>
                     <td >{year}</td>
                     <td >Semester {sem}</td> 
                     <td >{course}</td> 
@@ -122,7 +126,7 @@ function EditInternal() {
 
                             <td>{obj.mark.hasOwnProperty('sem'+sem) ?
                             <input type="number" value={studentsData[obj.regNo].mark['sem'+sem][subject].assignment}
-                            onChange={(e)=>editStudentData(e,obj.regNo,'assignment')}
+                            onChange={(e)=>editStudentData(e,obj.regNo,'assignment',3)}
                             onKeyUp={(e)=>{
                                 setTotalMark({...totalMark,
                                 [obj.regNo]:studentsData[obj.regNo].mark['sem'+sem][subject].assignment+studentsData[obj.regNo].mark['sem'+sem][subject].attendance+
@@ -130,7 +134,7 @@ function EditInternal() {
 
                             <td>{obj.mark.hasOwnProperty('sem'+sem) ?
                             <input type="number" value={studentsData[obj.regNo].mark['sem'+sem][subject].attendance}
-                            onChange={(e)=>editStudentData(e,obj.regNo,'attendance')}
+                            onChange={(e)=>editStudentData(e,obj.regNo,'attendance',3)}
                             onKeyUp={(e)=>{
                                 setTotalMark({...totalMark,
                                 [obj.regNo]:studentsData[obj.regNo].mark['sem'+sem][subject].assignment+studentsData[obj.regNo].mark['sem'+sem][subject].attendance+
@@ -138,7 +142,7 @@ function EditInternal() {
 
                             <td>{obj.mark.hasOwnProperty('sem'+sem) ?
                             <input type="number" value={studentsData[obj.regNo].mark['sem'+sem][subject].exam}
-                            onChange={(e)=>editStudentData(e,obj.regNo, 'exam')}
+                            onChange={(e)=>editStudentData(e,obj.regNo, 'exam',6)}
                             onKeyUp={(e)=>{
                                 setTotalMark({...totalMark,
                                 [obj.regNo]:studentsData[obj.regNo].mark['sem'+sem][subject].assignment+studentsData[obj.regNo].mark['sem'+sem][subject].attendance+
@@ -146,7 +150,7 @@ function EditInternal() {
 
                             <td>{obj.mark.hasOwnProperty('sem'+sem) ?
                             <input type="number" value={studentsData[obj.regNo].mark['sem'+sem][subject].seminar}
-                            onChange={(e)=>editStudentData(e,obj.regNo, 'seminar')}
+                            onChange={(e)=>editStudentData(e,obj.regNo, 'seminar',3)}
                             onKeyUp={(e)=>{
                                 setTotalMark({...totalMark,
                                 [obj.regNo]:studentsData[obj.regNo].mark['sem'+sem][subject].assignment+studentsData[obj.regNo].mark['sem'+sem][subject].attendance+

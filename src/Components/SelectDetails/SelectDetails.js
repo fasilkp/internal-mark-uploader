@@ -50,6 +50,7 @@ function SelectDetails() {
                 
                 <select className="form-select" value={course} onChange={(e)=>{
                   setSubLoad(true)
+                  setSubject("")
                   setCourse(e.target.value)}}>
                 {courses.map((obj,index)=>{
                       return <option key={index} value={obj.data().id}>{obj.data().name}</option>
@@ -60,6 +61,7 @@ function SelectDetails() {
                 <label className="form-label">Current Sem</label>
                 <select className="form-select" value={sem} onChange={(e)=>{
                   setSem(e.target.value)
+                  setSubject("")
                   // setSubject(record['sem'+sem].subjects[0])
                   }}>
                 <option value="1">First Semester</option>

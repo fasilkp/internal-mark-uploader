@@ -1,5 +1,5 @@
 .list-group-item{
-    height: 30px;
+    min-height: 30px;
     font-size: .8rem;
     display: flex;
     justify-content: space-between;

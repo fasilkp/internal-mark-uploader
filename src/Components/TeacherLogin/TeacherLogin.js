@@ -1,15 +1,13 @@
-import React, {useContext} from 'react'
+import React, {useContext,useEffect} from 'react'
 import { Fragment, useState } from 'react';
 import "../../common styles/Login.css";
-import {signInWithEmailAndPassword,signOut} from 'firebase/auth'
+import {signInWithEmailAndPassword} from 'firebase/auth'
 import {AdminId, auth} from '../../config/firebase'
 import { AuthContext } from '../../Context/Context';
 import {useNavigate } from 'react-router-dom';
 import AlertBox from '../AlertBox/AlertBox';
 import { ClipLoader } from 'react-spinners';
 import {Link} from "react-router-dom"
-import { getDoc,doc } from 'firebase/firestore';
-import db from '../../config/firebase'
 
 function TeacherLogin() {
   const [email, setEmail]=useState("")
@@ -18,7 +16,11 @@ function TeacherLogin() {
   const navigate=useNavigate()
   const {user,setUser}=useContext(AuthContext)
   const [alertPopup,setAlertPopup]=useState({status:false, message:"",icon:'circle-exclamation'})
-  
+  useEffect(()=>{
+    if(user && user.uid!=AdminId)
+        navigate('/teacher') 
+
+  },[user])
   const handleSubmit=async(e)=>{
     e.preventDefault();
     setLoad({...load,submit:true})
@@ -49,7 +51,7 @@ function TeacherLogin() {
   return ( 
     <Fragment>
   <div className='row admin-login Login' style={{marginTop:"160px"}}>
-        <h3 className="login-main-header">Login Into Internal Mark Uploader</h3>
+        <h3 className="login-main-header">Login into Internal Mark Uploader</h3>
         <div className="form-container login">
         <form>
         <div className="mb-3"><h4 className="container-header"><span>Login</span></h4></div>
@@ -62,17 +64,19 @@ function TeacherLogin() {
                   <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Enter Your Password' className="form-control" id="exampleInputPassword1"/>
         </div>
         <div className="mb-3">
-            <button className="login-btn" onClick={handleSubmit}>{load.submit ?<ClipLoader size="25" color="white"/>: "Login"}</button>  
+            <button className="login-btn"
+            disabled={email==="" || password===""}
+            onClick={handleSubmit}>{load.submit ?<ClipLoader size="25" color="white"/>: "Login"}</button>  
         </div>    
           </form>
     </div>
     <Link to="/teacher/signup" className='links'><div className="login-another"><span>Don't Have Acoount ? Register</span></div></Link>
+    <Link to="/" className='links'><div className="login-another"><span>Login as Student</span></div></Link>
     {alertPopup.status && 
     <AlertBox 
     message={alertPopup.message} 
     setPopup={()=>{
       setAlertPopup({...alertPopup,status:false})
-      navigate('/teacher')
     }}
     icon={alertPopup.icon} />
     }

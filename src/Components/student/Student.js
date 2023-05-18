@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect,Fragment } from 'react'
 import '../../common styles/listStyle.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Fragment } from 'react/cjs/react.development';
 import {Link} from 'react-router-dom'
 import db from "../../config/firebase"
 import { collection, onSnapshot, doc, deleteDoc } from "firebase/firestore"

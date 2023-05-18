@@ -1,7 +1,7 @@
 import React,{useState, useEffect,useContext} from 'react'
 import db from "../../config/firebase"
 import {AuthContext} from "../../Context/Context"
-import {collection, query, where, getDocs,setDoc,doc,addDoc} from 'firebase/firestore'
+import {collection, query, where, getDocs,setDoc,doc,getDoc} from 'firebase/firestore'
 import "./UploadMark.css"
 import { useLocation, useNavigate } from 'react-router-dom'
 import { replaceSpecialCharecters } from '../../commonFunctions/idGenerate'
@@ -12,6 +12,8 @@ const {user}=useContext(AuthContext)
 const location=useLocation();
 const navigate=useNavigate();
 const [load, setLoad]=useState({submit:false})
+const [check, setCheck]=useState(false)
+const [subName, setSubName]=useState("")
 const [students, setStudents]=useState([])
 const [studentsData, setStudentsData]=useState({})
 const[mark,setMark]=useState({
@@ -32,6 +34,11 @@ useEffect(async()=>{
         studentsData[obj.data().regNo]=mark
     })
     });
+    await getDoc(doc(db, 'courses', course)).then((snapShot)=>{
+        snapShot.data()['sem'+sem].subjects.map(item=>{
+                item.subCode==subject &&  setSubName(item.subName);
+        })
+    })
   },[])
 
 async function uploadMarks(){
@@ -47,7 +54,7 @@ async function uploadMarks(){
                         subCode: replaceSpecialCharecters(subject),
                         uploadedBy:user.displayName,
                         uploadedDate: new Date().toDateString(),
-                        subName:subject,
+                        subName:subName,
                         assignment:studentsData[obj.data().regNo].assignment,
                         attendance:studentsData[obj.data().regNo].attendance,
                         seminar:studentsData[obj.data().regNo].seminar,
@@ -102,57 +109,58 @@ async function uploadMarks(){
                         return <tr key={index}>
                         <td>{obj.data().regNo}</td>
                         <td>{obj.data().name}</td>
-                        <td htmlFor="assignmentInput1">
+                        <td>
                             <input type="number" id="assignmentInput1" 
-                            defaultValue='0'
+                            defaultValue={0}
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].assignment} 
                             onChange={(e)=>{
                             setStudentsData({
                                 ...studentsData,[obj.data().regNo]:{
                                                 ...studentsData[obj.data().regNo],
-                                                assignment:e.target.value>5 ? 5 : e.target.value<0 ? 0: parseInt(e.target.value)}
+                                                assignment:e.target.value>3 ? 3 : e.target.value<0 ? 0: parseInt(e.target.value)}
                             })}}/>
                         </td>
                         <td>
                             <input type="number"
-                            defaultValue='0'
+                            defaultValue={0}
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].attendance} 
                             onChange={(e)=>{
                             setStudentsData({
                                 ...studentsData,[obj.data().regNo]:{
                                                 ...studentsData[obj.data().regNo],
-                                                attendance:e.target.value>5 ? 5 : e.target.value<0 ? 0: parseInt(e.target.value)}
+                                                attendance:e.target.value>3 ? 3 : e.target.value<0 ? 0: parseInt(e.target.value)}
                             })}}/>
                         </td>
                         <td>
                             <input type="number"
-                            defaultValue='0'
+                            defaultValue={0}
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].exam}
                             onChange={(e)=>{
                             setStudentsData({
                                 ...studentsData,[obj.data().regNo]:{
                                                 ...studentsData[obj.data().regNo],
-                                                exam:e.target.value>5 ? 5 : e.target.value<0 ? 0: parseInt(e.target.value)}
+                                                exam:e.target.value>6 ? 6 : e.target.value<0 ? 0: parseInt(e.target.value)}
                             })}}/>
                         </td>
                         <td>
                             <input type="number" 
-                            defaultValue='0'
+                            defaultValue={0}
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].seminar} 
                             onChange={(e)=>{
                             setStudentsData({
                                 ...studentsData,[obj.data().regNo]:{
                                                 ...studentsData[obj.data().regNo],
-                                                seminar:e.target.value>5 ? 5 : e.target.value<0 ? 0: parseInt(e.target.value)}
+                                                seminar:e.target.value>3 ? 3 : e.target.value<0 ? 0: parseInt(e.target.value)}
                             })}}/>
                         </td>
                         <td>
-                            <input type="number" disabled  defaultValue='0'
+                            <input type="number" disabled  defaultValue={0}
                             value={studentsData[obj.data().regNo] && studentsData[obj.data().regNo].total()}/>
                         </td>
 
                     </tr> 
                 })}
+                
                 </tbody>
             </table>
         </div>
@@ -161,6 +169,8 @@ async function uploadMarks(){
                    {load.submit ?<ClipLoader size="25" color="white"/>: "Submit"}
                  </button></div>
         </div>
+       
+       
     </div>
   )
 }

@@ -1,11 +1,10 @@
-import React from 'react'
-import { Fragment } from 'react/cjs/react.production.min'
+import React,{Fragment} from 'react'
 import Header from '../../Components/Header/Header'
 import StudentLogin from '../../Components/StudentLogin/StudentLogin'
 function StudentLoginPage() {
   return (
     <Fragment>
-        <Header header="Student Login"></Header>
+        <Header header="Student Marks"></Header>
         <StudentLogin/>
     </Fragment>
   )
